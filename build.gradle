@@ -1,0 +1,162 @@
+plugins {
+
+    id 'groovy'
+}
+
+version = '0.1'
+
+ext {
+
+    buildType = 'ga' //beta
+
+    DISTRIBUTION_DIR = project.buildDir.absolutePath + File.separator + 'collectedFiles' + File.separator + name
+    VERSION_FILE = File.createTempFile('version', '.info')
+
+    //GROOVY_VERSION = '2.4.15'
+    GROOVY_VERSION = '2.5.7'
+    GRADLE_TASK_GROUP_LSDSL_ACTIONS = 'actions-' + name
+}
+
+rootProject.subprojects.each {println "sp : $it"}
+
+
+
+allprojects { oneProject ->
+
+
+    apply plugin: 'groovy'
+
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+
+    repositories {
+
+        mavenCentral()
+    }
+
+    sourceSets {
+        main {
+            java {
+                srcDirs = [] }    // no source dirs for the java compiler
+            groovy { srcDirs = ['src/main/java', 'src/main/groovy'] }  // compile everything in src/ with groovy
+        }
+    }
+
+    compileGroovy {
+
+        options.fork = true
+
+        //options.forkOptions.memoryMaximumSize = "2g"
+
+        options.incremental = true
+    }
+
+    configurations {
+
+        groovy
+        lib
+    }
+
+    dependencies {
+
+        implementation configurations.lib
+        lib configurations.groovy
+
+        if (oneProject.name != 'lsdsl-apt')
+            annotationProcessor project(':lsdsl-apt')
+
+        groovy (group: 'org.codehaus.groovy', name: 'groovy-all', version: rootProject.ext.GROOVY_VERSION)
+
+        lib (group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.8.1')
+        lib (group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.8.1')
+    }
+
+
+    test {
+        // enable TestNG support (default is JUnit)
+        useTestNG()
+    }
+
+}
+
+
+dependencies
+{
+    implementation project(':lsdsl-core')
+    implementation project(':lsdsl-apt')
+}
+
+task copyFiles(type: Copy) {
+
+    List<Project> ps = []
+
+    ps.addAll(subprojects)
+    ps.add(project)
+
+    println "copyFiles order : $ps"
+
+    into DISTRIBUTION_DIR
+
+    ps.each { p ->
+
+        into('') {
+            from p.file('app')
+        }
+
+        into('docs') {
+            from p.tasks.groovydoc.outputs
+        }
+
+        into('lib/ext') {
+            from p.configurations.lib
+        }
+
+        into('lib/int') {
+            from p.tasks.jar.outputs
+        }
+    }
+}
+
+task prepareVersionFile {
+
+    doLast {
+
+        def text = "LsDSL version               : $version \n"
+        text    += "Build Time                  : ${new Date()} + \n"
+        text    += "Embedded Groovy Version     : $GROOVY_VERSION"
+
+        VERSION_FILE.text = text
+    }
+}
+
+jar {
+
+    dependsOn prepareVersionFile
+
+    into ('') {
+
+        from VERSION_FILE
+        rename VERSION_FILE.name, 'lsdsl-version.info'
+    }
+}
+
+task beforeCompress(dependsOn: [copyFiles, groovydoc]) {
+
+}
+
+task compress(type: Zip, dependsOn: beforeCompress) {
+
+    from DISTRIBUTION_DIR
+    into project.name
+}
+
+task createDistributions(dependsOn: beforeCompress) {
+
+    group = GRADLE_TASK_GROUP_LSDSL_ACTIONS
+
+    doLast {
+
+        println "Build done !"
+    }
+}
+

@@ -1,0 +1,8 @@
+def modules = ['lsdsl-core', 'lsdsl-apt']
+
+modules.each { mod ->
+
+    include ":$mod"
+    project(":$mod").projectDir = new File(settingsDir, "modules/$mod")
+}
+
