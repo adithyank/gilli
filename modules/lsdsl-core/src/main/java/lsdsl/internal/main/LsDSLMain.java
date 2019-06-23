@@ -3,6 +3,7 @@ package lsdsl.internal.main;
 import groovy.lang.Closure;
 import groovy.util.Eval;
 import lsdsl.shell.LsDSLShell;
+import lsdsl.util.GeneralUtil;
 import lsdsl.util.Stdin;
 import picocli.CommandLine;
 
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Callable;
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -28,11 +29,37 @@ public class LsDSLMain
 
     static class ConsoleInputs
     {
-        public static final int    CONSOLE_COLS    = Integer.parseInt(sysProp("console.cols"));
-        public static final long   INVOCATION_TIME = Long.parseLong(sysProp("startmillis"));
-        public static final String HOME            = sysProp("home");
-        public static final String INVOCATION_DIR  = sysProp("invocation.dir");
-        public static final String SCRIPT_CONF     = sysProp("script.conf");
+        public static int    CONSOLE_COLS;
+        public static long   INVOCATION_TIME;
+        public static String HOME;
+        public static String INVOCATION_DIR;
+        public static String SCRIPT_CONF;
+
+        static
+        {
+            init();
+        }
+
+        private static void init()
+        {
+            String startMillisStr = sysProp("startmillis");
+
+            if (GeneralUtil.hasValue(startMillisStr))
+            {
+                INVOCATION_TIME = Long.parseLong(startMillisStr);
+                CONSOLE_COLS    = Integer.parseInt(sysProp("console.cols"));
+                HOME            = sysProp("home");
+                INVOCATION_DIR  = sysProp("invocation.dir");
+                SCRIPT_CONF     = sysProp("script.conf");
+            }
+            else
+            {
+                INVOCATION_TIME = System.currentTimeMillis();
+                CONSOLE_COLS = 100;
+                HOME = System.getProperty("user.dir");
+                INVOCATION_DIR = System.getProperty("user.dir");
+            }
+        }
 
         private static String sysProp(String suffix)
         {
@@ -83,6 +110,9 @@ public class LsDSLMain
     {
         Properties p = new Properties();
 
+        if (!GeneralUtil.hasValue(ConsoleInputs.SCRIPT_CONF))
+            return;
+
         try (FileReader fr = new FileReader(ConsoleInputs.SCRIPT_CONF))
         {
             p.load(fr);
@@ -113,24 +143,30 @@ public class LsDSLMain
         }
     }
 
+    /**
+     * Input Args validation flow and execution are done in same flow here. Otherwise, the same flow will have to be
+     * done twice once for validation and another for execution.
+     */
     private void execute()
     {
         shell();
 
+        ExecState state = ExecState.INVALID_INPUTS;
+
         if (parsedArgs.hasFileToExecute())
         {
-            runAndExit(() -> defaultShell.runScriptFile(parsedArgs.getFile()));
+            state = run(() -> defaultShell.runScriptFile(parsedArgs.getFile()));
         }
 
         if (parsedArgs.hasScriptTextToExecuteWithoutStdinReading())
         {
-            runAndExit(() -> defaultShell.runScriptText(parsedArgs.getScriptText()));
+            state = run(() -> defaultShell.runScriptText(parsedArgs.getScriptText()));
         }
 
         if (parsedArgs.hasPrintOptionWithoutStdinReading())
         {
             String scriptText = "println (" + parsedArgs.getScriptTextForPrint() + ')';
-            runAndExit(() -> defaultShell.runScriptText(scriptText));
+            state = run(() -> defaultShell.runScriptText(scriptText));
         }
 
         if (parsedArgs.shouldWorkForEachStdinLine())
@@ -149,7 +185,7 @@ public class LsDSLMain
                 scriptText = null; // just to satisfy java compiler. Otherwise, next line would show error
             }
 
-            runAndExit(() -> defaultShell.runScriptText(scriptText));
+            state = run(() -> defaultShell.runScriptText(scriptText));
         }
 
         if (parsedArgs.hasComplexClosureOption())
@@ -160,24 +196,65 @@ public class LsDSLMain
 
                 Closure c = (Closure) Eval.me(scriptText);
 
-                runAndExit(() -> Stdin.execLikeAwk(c));
+                state = run(() -> Stdin.execLikeAwk(c));
             }
             else if (parsedArgs.hasFileToExecute())
             {
                 //TODO : yet to implement : https://github.com/adithyank/lsdsl-core/issues/5
+                state = ExecState.EXECUTED_AND_NORMAL;
             }
         }
 
-        runAndExit(() -> {cmdLine.usage(System.out); return null;});
+        if (state == ExecState.INVALID_INPUTS)
+        {
+            cmdLine.usage(System.out);
+            LsDSL.exitAbnormally();
+        }
+
+        //System.out.println("keep = " + parsedArgs.shouldKeepRunning());
+
+        if (parsedArgs.shouldKeepRunning())
+        {
+            LiveThread.takeoff();
+        }
+        else
+        {
+            if (state == ExecState.EXECUTED_AND_NORMAL)
+                LsDSL.exitNormally();
+            else //if (state == ExecState.EXECUTED_AND_EXCEPTION)
+                LsDSL.exitAbnormally();
+        }
     }
 
-    private void runAndExit(Callable callable)
+    private static class LiveThread extends Thread
+    {
+        private LiveThread()
+        {
+        }
+
+        public static void takeoff()
+        {
+            new LiveThread().start();
+        }
+
+        @Override
+        public void run()
+        {
+            while (true)
+            {
+                GeneralUtil.sleep(1, TimeUnit.HOURS);
+            }
+        }
+    }
+
+    private ExecState run(Callable callable)
     {
         long s = System.currentTimeMillis();
 
         try
         {
             callable.call();
+            return ExecState.EXECUTED_AND_NORMAL;
         }
         catch (Throwable th)
         {
@@ -186,12 +263,15 @@ public class LsDSLMain
             else
                 System.err.println(th.toString());
 
-            LsDSL.exitAbnormally();
+            return ExecState.EXECUTED_AND_EXCEPTION;
         }
-        finally
-        {
-            LsDSL.exitNormally();
-        }
+    }
+
+    enum ExecState
+    {
+        EXECUTED_AND_NORMAL,
+        EXECUTED_AND_EXCEPTION,
+        INVALID_INPUTS
     }
 
 
@@ -210,6 +290,8 @@ public class LsDSLMain
     public static void main(String[] args)
     {
         //System.out.println("LsDSL is the top-most forked and contributed java project in github. SURE");
+
+        //args = new String[] {"-p", "2/33", "--keepRunning"};
 
         instance.init(args);
 

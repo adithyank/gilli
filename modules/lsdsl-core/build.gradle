@@ -2,4 +2,5 @@
 dependencies {
 
     implementation project(':lsdsl-apt')
+    //implementation files('/repo/personal-git/lsdsl/lsdsl-lang/modules/lsdsl-apt/build/libs/lsdsl-apt.jar')
 }

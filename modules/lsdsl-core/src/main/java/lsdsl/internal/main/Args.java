@@ -37,6 +37,9 @@ public class Args
     @Option(names = {"--stacktrace"}, description = "Prints stacktrace during Exception. default : ${DEFAULT-VALUE}")
     private boolean stacktrace = false;
 
+    @Option(names = {"-k", "--keepRunning"}, description = "Makes the " + LsDSL.PRODUCT + " keep running even after the execution is over. An option for daemon works. default : ${DEFAULT-VALUE}")
+    private boolean keepRunning = false;
+
     public boolean isHelp() {
         return help;
     }
@@ -99,4 +102,10 @@ public class Args
     {
         return forEachStdinLine;
     }
+
+    public boolean shouldKeepRunning()
+    {
+        return keepRunning;
+    }
+
 }

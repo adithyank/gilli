@@ -83,7 +83,7 @@ allprojects { oneProject ->
 dependencies
 {
     implementation project(':lsdsl-core')
-    implementation project(':lsdsl-apt')
+    //implementation project(':lsdsl-apt')
 }
 
 task copyFiles(type: Copy) {

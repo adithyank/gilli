@@ -1,6 +1,7 @@
 package lsdsl.util;
 
 import java.math.BigDecimal;
+import java.util.concurrent.TimeUnit;
 
 public class GeneralUtil
 {
@@ -18,6 +19,18 @@ public class GeneralUtil
         catch (NumberFormatException nfex)
         {
             return new BigDecimal(0);
+        }
+    }
+
+    public static void sleep(int time, TimeUnit timeUnit)
+    {
+        try
+        {
+            Thread.sleep(timeUnit.toMillis(time));
+        }
+        catch (InterruptedException e)
+        {
+            e.printStackTrace();
         }
     }
 
