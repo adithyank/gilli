@@ -1,4 +1,0 @@
-moduleName=lsdsl_core_ext
-moduleVersion=1.0
-extensionClasses=lsdsl.ext.StringInstanceMethodExt
-staticExtensionClasses=
