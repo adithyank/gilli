@@ -1,0 +1,36 @@
+entries:
+- title: lsdsl-lang
+  product: LSDSL Lang
+  version: 0.1
+  folders:
+
+  - title:
+    output: pdf
+    type: frontmatter
+    folderitems:
+    - title:
+      url: /titlepage.html
+      output: pdf
+      type: frontmatter
+    - title:
+      url: /tocpage.html
+      output: pdf
+      type: frontmatter
+
+  - title: Overview
+    output: web, pdf
+    folderitems:
+
+    - title: Get started
+      url: /index.html
+      output: web, pdf
+      type: homepage
+
+    - title: Quick Feel
+      url: /lang_quickfeel.html
+      output: web, pdf
+
+    - title: Features
+      url: /lang_features.html
+      output: web, pdf
+
