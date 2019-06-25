@@ -54,10 +54,18 @@ entries:
         url: /lang_contribution.html
         output: web, pdf
 
-  - title: Build-in DSLs
+  - title: Built-in DSLs
     output: web, pdf
     folderitems:
 
       - title: Database Query (DBDSL)
         url: /lang_release_notes_1.0.html
+        output: web, pdf
+
+  - title: Developing New DSLs
+    output: web, pdf
+    folderitems:
+
+      - title: Database Query (DBDSL)
+        url: /lang_new_dsl_dev.html
         output: web, pdf
