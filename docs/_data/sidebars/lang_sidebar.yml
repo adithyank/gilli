@@ -34,3 +34,30 @@ entries:
       url: /lang_features.html
       output: web, pdf
 
+    - title: Installation
+      url: /lang_installation.html
+      output: web, pdf
+
+  - title: Release Notes
+    output: web, pdf
+    folderitems:
+
+      - title: 1.0
+        url: /lang_release_notes_1.0.html
+        output: web, pdf
+
+  - title: Contribute
+    output: web, pdf
+    folderitems:
+
+      - title: How to contribute
+        url: /lang_contribution.html
+        output: web, pdf
+
+  - title: Build-in DSLs
+    output: web, pdf
+    folderitems:
+
+      - title: Database Query (DBDSL)
+        url: /lang_release_notes_1.0.html
+        output: web, pdf
