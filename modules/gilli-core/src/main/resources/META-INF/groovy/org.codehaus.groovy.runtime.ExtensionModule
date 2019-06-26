@@ -1,0 +1,4 @@
+moduleName=gilli_core_ext
+moduleVersion=1.0
+extensionClasses=gilli.ext.StringInstanceMethodExt
+staticExtensionClasses=

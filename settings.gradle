@@ -1,4 +1,4 @@
-def modules = ['lsdsl-core', 'lsdsl-apt']
+def modules = ['gilli-pre', 'gilli-core']
 
 modules.each { mod ->
 

@@ -14,7 +14,7 @@ ext {
 
     //GROOVY_VERSION = '2.4.15'
     GROOVY_VERSION = '2.5.7'
-    GRADLE_TASK_GROUP_LSDSL_ACTIONS = 'actions-' + name
+    GRADLE_TASK_GROUP_GILLI_ACTIONS = 'actions-' + name
 }
 
 rootProject.subprojects.each {println "sp : $it"}
@@ -62,8 +62,8 @@ allprojects { oneProject ->
         implementation configurations.lib
         lib configurations.groovy
 
-        if (oneProject.name != 'lsdsl-apt')
-            annotationProcessor project(':lsdsl-apt')
+        if (oneProject.name != 'gilli-pre')
+            annotationProcessor project(':gilli-pre')
 
         groovy (group: 'org.codehaus.groovy', name: 'groovy-all', version: rootProject.ext.GROOVY_VERSION)
 
@@ -82,8 +82,7 @@ allprojects { oneProject ->
 
 dependencies
 {
-    implementation project(':lsdsl-core')
-    //implementation project(':lsdsl-apt')
+    implementation project(':gilli-core')
 }
 
 task copyFiles(type: Copy) {
@@ -121,7 +120,7 @@ task prepareVersionFile {
 
     doLast {
 
-        def text = "LsDSL version               : $version \n"
+        def text = "Gilli version               : $version \n"
         text    += "Build Time                  : ${new Date()} + \n"
         text    += "Embedded Groovy Version     : $GROOVY_VERSION"
 
@@ -136,7 +135,7 @@ jar {
     into ('') {
 
         from VERSION_FILE
-        rename VERSION_FILE.name, 'lsdsl-version.info'
+        rename VERSION_FILE.name, 'gilli-version.info'
     }
 }
 
@@ -152,7 +151,7 @@ task compress(type: Zip, dependsOn: beforeCompress) {
 
 task createDistributions(dependsOn: beforeCompress) {
 
-    group = GRADLE_TASK_GROUP_LSDSL_ACTIONS
+    group = GRADLE_TASK_GROUP_GILLI_ACTIONS
 
     doLast {
 

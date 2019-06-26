@@ -1,0 +1,162 @@
+#!/usr/bin/env bash
+
+#########################################################################################
+
+function updateLatestVersion()
+{
+	if [ -f "$LATEST_VERSION_ZIP" ]
+	then
+		
+		echo "Upgrading to Latest Version"
+		
+		TMP=/tmp/gilli-vu
+
+		rm -rf $TMP
+		
+		unzip -q -u $LATEST_VERSION_ZIP -d $TMP
+	
+		rsync -avzcq $TMP/gilli/ $GILLI_HOME --delete
+		
+		rm -f $LATEST_VERSION_ZIP
+		rm -rf $TMP
+
+		echo "Upgrade done"
+	fi
+}
+#########################################################################################
+
+START_MILLIS=`echo $(($(date +%s%N)/1000000))`
+ 
+COLS=$(tput cols)
+
+BINDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+GILLI_HOME=`dirname $BINDIR`
+
+LATEST_VERSION_ZIP=$GILLI_HOME/gilli-ga-latest.zip
+GILLI_SCRIPT_CONF_FILE=$BINDIR/gilli-script.conf
+
+INVOCATION_DIR=`pwd`
+
+
+CLASS_PATH=
+JAVA_OPTS=
+SANDBOX_MODE=
+SANDBOX_DIR=
+LOG4J2_CONFIG=
+
+while IFS='=' read -r key value
+do
+	#echo "key = $key, value = $value"
+	
+	if [ "$key" = "CLASS_PATH" ]
+	then
+		CLASS_PATH=$value
+	elif [ "$key" = "JAVA_OPTS" ]
+	then
+		JAVA_OPTS=$value
+	elif [ "$key" = "SANDBOX_MODE" ]
+	then
+		SANDBOX_MODE=$value
+	elif [ "$key" = "SANDBOX_DIR" ]
+	then
+		SANDBOX_DIR=$value
+	elif [ "$key" = "LOG4J2_CONFIG" ]
+	then
+		LOG4J2_CONFIG=$value
+	fi
+	
+done <  "$GILLI_SCRIPT_CONF_FILE"
+
+CLASS_PATH=${CLASS_PATH//HOME/$GILLI_HOME}
+LOG4J2_CONFIG=${LOG4J2_CONFIG//HOME/$GILLI_HOME}
+
+SANDBOX_OPT=$1
+
+# Overwriting the SANDBOX_MODE if given in the command line
+
+if [ "$SANDBOX_OPT" = "--sandbox" ] || [ "$SANDBOX_OPT" = "--no-sandbox" ]
+then
+	SANDBOX_MODE=$SANDBOX_OPT
+	shift	
+fi
+
+#echo "sandbox mode  = $SANDBOX_MODE"
+#echo "bindir        = $BINDIR"
+#echo "gilli home   = $GILLI_HOME"
+#echo "invocationdir = $INVOCATION_DIR"
+
+if [ -z $JAVA_HOME ]
+then
+	echo "\$JAVA_HOME not set"
+	exit
+fi
+
+updateLatestVersion
+
+EXEC_FOLDER=
+
+if [ "$SANDBOX_MODE" = "--sandbox" ]
+then
+
+	DATE=`date +%Y-%m-%d_%H-%M-%S`
+	EXEC_FOLDER="$SANDBOX_DIR/$DATE"
+	
+	if [ ! -d "$EXEC_FOLDER" ]; then
+		mkdir -p "$EXEC_FOLDER"
+	fi
+	
+	echo "Script Working Directory : $EXEC_FOLDER"
+	
+	cd $EXEC_FOLDER;
+	
+	#echo "Executing cmds..."
+
+	while IFS='=' read -r key value
+	do
+		#echo "key = $key, value = $value"
+		
+		if [ "$key" = "SANDBOX_CMDS_BEFORE_JVM_INVOCATION" ]
+		then
+			
+			cmd=${value//HOME/$GILLI_HOME}
+			$cmd
+		fi
+		
+	done <  "$GILLI_SCRIPT_CONF_FILE"
+
+fi
+
+
+SYSTEM_PROPS="-Dgilli.startmillis=$START_MILLIS"
+SYSTEM_PROPS="$SYSTEM_PROPS -Dlog4j.configurationFile=$LOG4J2_CONFIG"
+SYSTEM_PROPS="$SYSTEM_PROPS -Dgilli.home=$GILLI_HOME"
+SYSTEM_PROPS="$SYSTEM_PROPS -Dgilli.console.cols=$COLS"
+SYSTEM_PROPS="$SYSTEM_PROPS -Dgilli.invocation.dir=$INVOCATION_DIR"
+SYSTEM_PROPS="$SYSTEM_PROPS -Dgilli.script.conf=$GILLI_SCRIPT_CONF_FILE"
+
+# $@ enclosed with double quotes as the space character inside an argument
+# should not split that in to multiple args 
+$JAVA_HOME/bin/java $JAVA_OPTS $SYSTEM_PROPS -cp $CLASS_PATH gilli.internal.main.GilliMain "$@"
+
+RET=$?
+
+
+if [ "$SANDBOX_MODE" = "--sandbox" ]
+then
+
+	while IFS='=' read -r key value
+	do		
+		if [ "$key" = "SANDBOX_CMDS_AFTER_JVM_INVOCATION" ]
+		then
+			
+			cmd=${value//HOME/$GILLI_HOME}
+			$cmd
+		fi
+		
+	done <  "$GILLI_SCRIPT_CONF_FILE"
+
+fi
+
+updateLatestVersion
+
+exit $RET

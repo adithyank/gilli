@@ -1,18 +1,18 @@
-repository: adithyank/lsdsl-lang
+repository: adithyank/gilli
 
 output: web
 # this property is useful for conditional filtering of content that is separate from the PDF.
 
-topnav_title: LsDSL Lang
+topnav_title: Gilli
 # this appears on the top navigation bar next to the home button
 
-site_title: LsDSL Lang
+site_title: Gilli
 # this appears in the html browser tab for the site title (seen mostly by search engines, not users)
 
 company_name: Adithyan K
 # this appears in the footer
 
-github_editme_path: #adithyank/lsdsl-lang/tree/master/docs/
+github_editme_path: #adithyank/gilli/tree/master/docs/
 # if you're using Github, provide the basepath to the branch you've created for reviews, following the sample here. if not, leave this value blank.
 
 # gitlab_editme_path: tomjoht/documentation-theme-jekyll/blob/gh-pages/
@@ -36,7 +36,7 @@ exclude:
   - vendor
 # these are the files and directories that jekyll will exclude from the build
 
-feedback_subject_line: LsDSL Lang
+feedback_subject_line: Gilli
 
 feedback_email: adi.k.dev@gmail.com
 # used as a contact email for the Feedback link in the top navigation bar
@@ -71,6 +71,11 @@ defaults:
   -
     scope:
       path: ""
+    values:
+      gilli_project_title: "**`Gilli`**"
+  -
+    scope:
+      path: ""
       type: "pages"
     values:
       layout: "page"
@@ -78,7 +83,6 @@ defaults:
       search: true
       sidebar: lang_sidebar
       topnav: topnav
-      adi_project_title: "LsDSL Lang"
   -
     scope:
       path: ""

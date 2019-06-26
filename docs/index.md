@@ -12,7 +12,7 @@ permalink: index.html
 
 A Platform that has lot of [DSL](https://en.wikipedia.org/wiki/Domain-specific_language)s for day to day purpose
 
-`lsdsl-lang` is a  **library** with lot of built-in DSLs and platform 
+{{ page.gilli_project_title }} is a  **library** with lot of built-in DSLs and platform 
 for creating lot of DLSs using `Groovy` and `Java` languages.
 
 This platform is built using the DSL facilities offered by
@@ -29,7 +29,7 @@ use the builtin DSLs for the common tasks to drastically improve
 developer productivity. Also, development teams can create their own
 DSLs to solve their domain problems at hand.
 
-`lsdsl-lang` platform is also targetting non-development (testers, software
+{{ page.gilli_project_title }} platform is also targetting non-development (testers, software
 support personnel, system administrators) teams to better
 do their routine works using quick easy scripts.
 
@@ -40,7 +40,7 @@ Keep following this project for new features, updates...!
 
 # Design
 
-**LsDSL** does not require you to write parsers or grammer to compile your DSL code. It is over the facilities of Groovy only.
+{{ page.gilli_project_title }} project does not require you to write parsers or grammer to compile your DSL code. It is over the facilities of Groovy only.
 
 The DSL Script code that you write is a legal groovy code requiring additional classpath entries. That is it !
 
