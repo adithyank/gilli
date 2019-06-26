@@ -34,6 +34,10 @@ entries:
       url: /lang_features.html
       output: web, pdf
 
+    - title: Terminology
+      url: /lang_terminology.html
+      output: web, pdf
+
     - title: Installation
       url: /lang_installation.html
       output: web, pdf
