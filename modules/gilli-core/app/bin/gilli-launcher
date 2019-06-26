@@ -33,7 +33,7 @@ BINDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 GILLI_HOME=`dirname $BINDIR`
 
 LATEST_VERSION_ZIP=$GILLI_HOME/gilli-ga-latest.zip
-GILLI_SCRIPT_CONF_FILE=$BINDIR/gilli-script.conf
+GILLI_SCRIPT_CONF_FILE=$BINDIR/gilli.conf
 
 INVOCATION_DIR=`pwd`
 
