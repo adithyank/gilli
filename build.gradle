@@ -106,11 +106,11 @@ task copyFiles(type: Copy) {
             from p.tasks.groovydoc.outputs
         }
 
-        into('lib/ext') {
+        into('internal/lib/ext') {
             from p.configurations.lib
         }
 
-        into('lib/int') {
+        into('internal/lib/int') {
             from p.tasks.jar.outputs
         }
     }

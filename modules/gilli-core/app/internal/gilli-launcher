@@ -29,8 +29,9 @@ START_MILLIS=`echo $(($(date +%s%N)/1000000))`
  
 COLS=$(tput cols)
 
-BINDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-GILLI_HOME=`dirname $BINDIR`
+INTERNAL_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+GILLI_HOME=`dirname $INTERNAL_DIR`
+BINDIR="$GILLI_HOME/bin"
 
 LATEST_VERSION_ZIP=$GILLI_HOME/gilli-ga-latest.zip
 GILLI_SCRIPT_CONF_FILE=$BINDIR/gilli.conf
@@ -80,9 +81,10 @@ then
 	shift	
 fi
 
+#echo "internal dir  = $INTERNAL_DIR"
 #echo "sandbox mode  = $SANDBOX_MODE"
 #echo "bindir        = $BINDIR"
-#echo "gilli home   = $GILLI_HOME"
+#echo "gilli home    = $GILLI_HOME"
 #echo "invocationdir = $INVOCATION_DIR"
 
 if [ -z $JAVA_HOME ]
@@ -133,6 +135,8 @@ SYSTEM_PROPS="$SYSTEM_PROPS -Dgilli.home=$GILLI_HOME"
 SYSTEM_PROPS="$SYSTEM_PROPS -Dgilli.console.cols=$COLS"
 SYSTEM_PROPS="$SYSTEM_PROPS -Dgilli.invocation.dir=$INVOCATION_DIR"
 SYSTEM_PROPS="$SYSTEM_PROPS -Dgilli.script.conf=$GILLI_SCRIPT_CONF_FILE"
+
+#echo "classpath = $CLASS_PATH"
 
 # $@ enclosed with double quotes as the space character inside an argument
 # should not split that in to multiple args 

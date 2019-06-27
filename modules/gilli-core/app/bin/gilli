@@ -2,6 +2,6 @@
 
 BINDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-sh $BINDIR/gilli-launcher "$@"
+sh $BINDIR/../internal/gilli-launcher "$@"
 
 exit $?
