@@ -29,7 +29,7 @@ Email.send {
     a State in Southern Part of India)
     
     The word Gilli is also the word in Tamil Language that is
-    colloquially used to specify a great achivement or great achiever
+    colloquially used to specify a great achievement or great achiever
     in Tamil Nadu.
     
     Happy Gilli !

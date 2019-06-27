@@ -21,10 +21,14 @@ entries:
     output: web, pdf
     folderitems:
 
-    - title: Get started
+    - title: Introduction
       url: /index.html
       output: web, pdf
       type: homepage
+
+    - title: Why this name?
+      url: /lang_whythisname.html
+      output: web, pdf
 
     - title: Quick Feel
       url: /lang_quickfeel.html
