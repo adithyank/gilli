@@ -44,6 +44,10 @@ public class GilliMain
         {
             String startMillisStr = sysProp("startmillis");
 
+            /*
+               This if condition is added to run the `gilli` methods from within the IDE. In the absense of this,
+               Exceptions would come due to missing files, properties, etc
+             */
             if (GeneralUtil.hasValue(startMillisStr))
             {
                 INVOCATION_TIME = Long.parseLong(startMillisStr);
@@ -294,7 +298,6 @@ public class GilliMain
         //args = new String[] {"-p", "2/33", "--keepRunning"};
 
         instance.init(args);
-
         instance.exec();
     }
 }
