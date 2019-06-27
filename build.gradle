@@ -40,6 +40,13 @@ allprojects { oneProject ->
                 srcDirs = [] }    // no source dirs for the java compiler
             groovy { srcDirs = ['src/main/java', 'src/main/groovy'] }  // compile everything in src/ with groovy
         }
+
+        test {
+            java {
+                srcDirs = [] }    // no source dirs for the java compiler
+            groovy { srcDirs = ['src/test/java', 'src/test/groovy'] }  // compile everything in src/ with groovy
+
+        }
     }
 
     compileGroovy {
@@ -69,12 +76,42 @@ allprojects { oneProject ->
 
         lib (group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.8.1')
         lib (group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.8.1')
+
+        testImplementation (group: 'org.testng', name: 'testng', version: '6.8')
     }
 
 
     test {
         // enable TestNG support (default is JUnit)
-        useTestNG()
+        useTestNG() {
+
+            testLogging {
+
+                showStandardStreams = true
+
+                events "skipped", "failed", "standard_out", "standard_error"
+                //events "passed", "skipped", "failed", "standard_out", "standard_error"
+
+                afterSuite { desc, result ->
+                    if (!desc.parent) // will match the outermost suite
+                    {
+                        println ""
+                        println "==================================================================================="
+                        println "webTest Test Results"
+                        println "--------------------"
+                        println "Test Results : Project          : $project.name"
+                        println "Test Results : Overall Status   : $result.resultType"
+                        println "Test Results : Total Tests      : $result.testCount"
+                        println "Test Results : Successful Tests : $result.successfulTestCount"
+                        println "Test Results : Failed Tests     : $result.failedTestCount"
+                        println "Test Results : Skipped Tests    : $result.skippedTestCount"
+                        println "==================================================================================="
+                        println ""
+                    }
+                }
+            }
+
+        }
     }
 
 }
