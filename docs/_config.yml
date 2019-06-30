@@ -73,6 +73,7 @@ defaults:
       path: ""
     values:
       gilli_project_title: "**`Gilli`**"
+      gilli_project: "Gilli"
   -
     scope:
       path: ""
