@@ -6,6 +6,8 @@ sidebar: lang_sidebar
 permalink: index.html
 ---
 
+{{ site.github.project_title }}
+
 <div markdown="span" class="alert alert-info" role="alert">
 
 <i class="fa fa-info-circle"></i> A DSL Platform with lot of built-in DSLs and facility to write new DLSs ultra fast.
