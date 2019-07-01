@@ -1,4 +1,4 @@
-repository: adithyank/gilli
+repository: gilli-tools/gilli
 
 output: web
 # this property is useful for conditional filtering of content that is separate from the PDF.
@@ -9,10 +9,10 @@ topnav_title: Gilli
 site_title: Gilli
 # this appears in the html browser tab for the site title (seen mostly by search engines, not users)
 
-company_name: Adithyan K
+company_name: Gilli Tools
 # this appears in the footer
 
-github_editme_path: #adithyank/gilli/tree/master/docs/
+github_editme_path: #gilli-tools/gilli/tree/master/docs/
 # if you're using Github, provide the basepath to the branch you've created for reviews, following the sample here. if not, leave this value blank.
 
 # gitlab_editme_path: tomjoht/documentation-theme-jekyll/blob/gh-pages/
