@@ -1,3 +1,7 @@
+Complete Details in [Project Github Page](https://adithyank.github.io/gilli/)
+
+# Gilli
+
 1. Simply, a project over [Groovy](http://groovy.apache.org/)
 1. A [DSL](https://en.wikipedia.org/wiki/Domain-specific_language) 
    Platform + Lot of built-in DSLs for day to day purpose
