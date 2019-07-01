@@ -14,7 +14,7 @@ permalink: index.html
 <br><br>
 <i class="fa fa-info-circle"></i> Write scripts quickly for day to day routine checks or Automation
 <br><br>
-<i class="fa fa-info-circle"></i> Java, Groovy, Gilli Power at Command Line 
+<i class="fa fa-info-circle"></i> Power of Java, Groovy, Gilli at Command Line 
 <br><br>
 <i class="fa fa-info-circle"></i> Defining Custom Commands for Frequent Invocations
 <br><br>
