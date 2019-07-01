@@ -4,7 +4,7 @@ topnav:
 - title: Topnav
   items:
     - title: GitHub
-      external_url: https://github.com/adithyank/gilli
+      external_url: https://github.com/gilli-tools/gilli
     - title: News
       url: /news
 
