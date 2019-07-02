@@ -128,4 +128,4 @@ github: [metadata]
 
 plugins:
   - "jekyll-github-metadata"
-
+  - jekyll-seo-tag
