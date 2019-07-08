@@ -1,0 +1,29 @@
+<div>
+<ul id="multiproglangcode" class="nav nav-tabs">
+    <li class="active" style="margin:5px 0px"><a class="noCrossRef" href="#groovy" data-toggle="tab">Groovy</a></li>
+    <li style="margin:5px 0px"><a class="noCrossRef" href="#java" data-toggle="tab">Java</a></li>
+    <li style="margin:5px 0px"><a class="noCrossRef" href="#console" data-toggle="tab">Console</a></li>
+</ul>
+
+<div class="tab-content" style = "padding:0px">
+
+<div role="tabpanel" class="tab-pane active" id="groovy" markdown="1">
+{% highlight groovy %}
+{% include {{ include.groovyfile }} %}
+{% endhighlight %}
+</div>
+
+<div role="tabpanel" class="tab-pane" id="java">
+{% highlight java %}
+{% include {{ include.javafile }} %}
+{% endhighlight %}
+</div>
+
+<div role="tabpanel" class="tab-pane" id="console">
+{% highlight bash %}
+$ {% include {{ include.cmdfile }} %}
+{% endhighlight %}
+</div>
+</div>
+
+</div>

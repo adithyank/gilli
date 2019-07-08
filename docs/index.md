@@ -73,8 +73,9 @@ permalink: index.html
 1. Enormous utilities in the command line
 1. `Plus Lots`
 
+# Code2
 
-
+{% include aditabbedcode.html groovyfile="codes/code.aaaa.groovy" javafile="codes/code.aaaa.java" cmdfile="codes/code.aaaa.bash" %}
 
 # How it can be utilized?
 
@@ -102,5 +103,6 @@ additional classpath entries. That is it !
 
 {{ page.gilli_project_title }} has its own launcher script for addtional
 capabilities
+
 
 {% include links.html %}
