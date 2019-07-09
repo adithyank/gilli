@@ -1,4 +1,8 @@
-def modules = ['gilli-pre', 'gilli-core']
+def modules = [
+        'gilli-pre',
+        'gilli-core',
+        'gilli-science-conversion'
+]
 
 modules.each { mod ->
 

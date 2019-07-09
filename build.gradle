@@ -120,6 +120,7 @@ allprojects { oneProject ->
 dependencies
 {
     implementation project(':gilli-core')
+    implementation project(':gilli-science-conversion')
 }
 
 task copyFiles(type: Copy) {
