@@ -197,3 +197,4 @@ task createDistributions(dependsOn: beforeCompress) {
     }
 }
 
+defaultTasks 'createDistributions'
