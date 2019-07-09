@@ -149,16 +149,24 @@ class UnitValue
         value.toPlainString() + ' ' + unitName
     }
 
+    UnitValue getAs(String unitName)
+    {
+        this.unitName = unitName
+        return this
+    }
+
+    UnitValue to(String toUnitName)
+    {
+        unitType.to(this, toUnitName)
+    }
+
     def propertyMissing(String name)
     {
         if (!name.startsWith('to'))
-        {
-            this.unitName = name
-            return this
-        }
+            return getAs(name)
 
         name = name.substring(2, name.length())
-        unitType.to(this, name)
+        to(name)
     }
 }
 
