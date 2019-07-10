@@ -22,11 +22,15 @@ permalink: index.html
 <br><br>
 <i class="fa fa-info-circle"></i> A Scripting Platform
 <br><br>
-<i class="fa fa-info-circle"></i> Integrated with Java based Enterprise Applications for Quick Development
+<i class="fa fa-info-circle"></i> Can be integrated with Java based Enterprise Applications for Quick Development
 </div>
 
 
 {% include tip.html content="If you're here, it means you probably want to explore Domain Specific Languages for your own task" %}
+
+Jump to the [page](lang_quickfeel.html) to see the examples to start working and enjoy the power of 
+{{ page.gilli_project_title }}
+
 
 # More on {{ page.gilli_project_title }} ?
 
