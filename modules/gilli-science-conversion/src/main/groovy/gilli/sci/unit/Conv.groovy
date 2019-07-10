@@ -1,4 +1,4 @@
-package gilli.sci.conv
+package gilli.sci.unit
 
 import gilli.util.GilliRTException
 import groovy.transform.CompileStatic
@@ -6,37 +6,73 @@ import groovy.transform.PackageScope
 import groovy.transform.stc.ClosureParams
 import groovy.transform.stc.SimpleType
 
-@CompileStatic
 class Units
 {
-    static final Map<String, UnitType> types = [:]
+    static final Converter convert = Converter.INSTANCE
+    static final Converter type = Converter.INSTANCE
+}
 
-    private static <T extends UnitType> T type0(String unitType, Class<T> klass)
+@CompileStatic
+class Converter
+{
+    @PackageScope
+    static Converter INSTANCE = new Converter()
+
+    final Map<String, Class<? extends UnitType>> typedefs = [:]
+
+    final Map<String, UnitType> types = [:]
+
+    private Converter()
+    {
+        typedefs.length = LengthUnitType
+        typedefs.area   = AreaUnitType
+    }
+
+    public <T extends UnitType> T type(String unitType)
     {
         T t = (T) types[unitType]
         if (t)
             return t
 
-        t = klass.newInstance()
+        checkValidType(unitType)
+
+        t = typedefs[unitType].newInstance() as T
         t.type = unitType
         types[unitType] = t
         return t
     }
 
-    static void checkValidType(String unitType)
+    void checkValidType(String unitType)
     {
-        if (!types.containsKey(unitType))
+        if (!typedefs.containsKey(unitType))
             throw new GilliRTException("Unknown UnitType : " + unitType)
     }
 
-    static UnitValue convert_length(Number number)
+    UnitValue length(Number number, String unitName = length.reference())
     {
-        new UnitValue(length, number)
+        new UnitValue(length, unitName, number)
     }
 
-    static UnitType getLength()
+    UnitType getLength()
     {
-        return type0('length', LengthUnitType)
+        return type('length')
+    }
+
+    def propertyMissing(String name)
+    {
+        type(name)
+    }
+
+    def methodMissing(String name, def args)
+    {
+        List list = args as List
+        if (!list)
+            return
+
+        if (list.size() == 1 && list[0] instanceof Number)
+        {
+            new UnitValue(type(name), list[0] as Number)
+        }
     }
 }
 
@@ -107,6 +143,11 @@ abstract class UnitType
     void printSpecs()
     {
         specs.each {println it}
+    }
+
+    def propertyMissing(String name)
+    {
+        spec(name)
     }
 }
 
@@ -265,5 +306,10 @@ class UnitConversionSpec
     boolean getHasClosure()
     {
         conversionClosure != null
+    }
+
+    BigDecimal getFactor()
+    {
+        conversionFactorToRef
     }
 }

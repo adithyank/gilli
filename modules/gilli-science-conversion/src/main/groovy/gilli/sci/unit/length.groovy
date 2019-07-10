@@ -1,4 +1,4 @@
-package gilli.sci.conv
+package gilli.sci.unit
 
 import groovy.transform.CompileStatic
 
@@ -29,9 +29,12 @@ class LengthUnitType extends UnitType
         register specOf('foot_clarke').factorToRef(0.3047972654)
         register specOf('foot_indian').factorToRef(0.304799514)
         register specOf('foot_metric').factorToRef(Math.sqrt(0.1d))
+        register specOf('foot_us').factorToRef(1200/3937)
+        register specOf('chain').factorToRef(spec('foot_us').conversionFactorToRef * 66)
         register specOf('furlong').factorToRef(201.168).symbol("fur")
         register specOf('hand').factorToRef(0.1016)
         register specOf('inch').factorToRef(0.0254)
+        register specOf('mil').factorToRef(0.0254 / 1000)
         register specOf('league').factorToRef(4828)
         register specOf('lightsecond').factorToRef(299792458)
         register specOf('lightminute').factorToRef(299792458l * 60)
