@@ -123,4 +123,4 @@ $ gilli -p 'convert.area(1).acre.toAre'
 ```
 
 There are lot of such unit conversions available in gilli. Pls see
-the [Full List here]({ site.baseurl }{% link pages/lang/lang_sci_conversions.md %})
+the [Full List here]({{ site.baseurl }}{% link pages/lang/lang_sci_conversions.md %})
