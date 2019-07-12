@@ -74,6 +74,7 @@ defaults:
     values:
       gilli_project_title: "**`Gilli`**"
       gilli_project: "Gilli"
+      gilli_postBuild_taskName: "prepareDocsForPage"
   -
     scope:
       path: ""

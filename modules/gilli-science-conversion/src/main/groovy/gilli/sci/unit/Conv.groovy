@@ -18,14 +18,18 @@ class Converter
     @PackageScope
     static Converter INSTANCE = new Converter()
 
-    final Map<String, Class<? extends UnitType>> typedefs = [:]
-
-    final Map<String, UnitType> types = [:]
+    private final Map<String, Class<? extends UnitType>> typedefs = [:]
+    private final Map<String, UnitType> types = [:]
 
     private Converter()
     {
         typedefs.length = LengthUnitType
         typedefs.area   = AreaUnitType
+    }
+
+    List<String> getRegisteredTypes()
+    {
+        typedefs.keySet().toList()
     }
 
     public <T extends UnitType> T type(String unitType)
@@ -89,6 +93,11 @@ abstract class UnitType
     UnitType()
     {
         registerSpecs()
+    }
+
+    String getReferenceUnit()
+    {
+        reference()
     }
 
     @Override
@@ -220,6 +229,7 @@ class UnitConversionSpec
 
     BigDecimal conversionFactorToRef
     Closure<Number> conversionClosure //one Number value will be given to the closure
+    String conversionClosureDescription
 
     @Override
     String toString()
@@ -291,8 +301,9 @@ class UnitConversionSpec
         return this
     }
 
-    UnitConversionSpec convertUsing(@ClosureParams(value = SimpleType, options = ['java.lang.Number']) Closure<Number> closure)
+    UnitConversionSpec convertUsing(String conversionClosureDescription, @ClosureParams(value = SimpleType, options = ['java.lang.Number']) Closure<Number> closure)
     {
+        this.conversionClosureDescription = conversionClosureDescription
         this.conversionClosure = closure
         return this
     }

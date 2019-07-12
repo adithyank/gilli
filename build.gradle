@@ -119,8 +119,7 @@ allprojects { oneProject ->
 
 dependencies
 {
-    implementation project(':gilli-core')
-    implementation project(':gilli-science-conversion')
+    implementation project(':gilli-cover')
 }
 
 task copyFiles(type: Copy) {
@@ -187,7 +186,18 @@ task compress(type: Zip, dependsOn: beforeCompress) {
     into project.name
 }
 
-task createDistributions(dependsOn: beforeCompress) {
+task postBuild(type: JavaExec) {
+
+    outputs.upToDateWhen { false }
+
+    classpath = sourceSets.main.runtimeClasspath
+
+    main = 'gilli.cover.CoverMain'
+
+    args project.projectDir
+}
+
+task createDistributions(dependsOn: [beforeCompress, postBuild]) {
 
     group = GRADLE_TASK_GROUP_GILLI_ACTIONS
 

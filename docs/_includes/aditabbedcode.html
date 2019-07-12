@@ -8,13 +8,20 @@
 <div class="tab-content" style = "padding:0px">
 
 <div role="tabpanel" class="tab-pane active" id="groovy" markdown="1">
-{% highlight groovy %}
+{% highlight groovy linenos%}
+
+{% if include.groovytext %}
+{{ include.groovytext }}
+{% endif %}
+
 {% include {{ include.groovyfile }} %}
+
 {% endhighlight %}
+
 </div>
 
 <div role="tabpanel" class="tab-pane" id="java">
-{% highlight java %}
+{% highlight java linenos%}
 {% include {{ include.javafile }} %}
 {% endhighlight %}
 </div>

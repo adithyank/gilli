@@ -1,7 +1,8 @@
 def modules = [
         'gilli-pre',
         'gilli-core',
-        'gilli-science-conversion'
+        'gilli-science-conversion',
+        'gilli-cover'
 ]
 
 modules.each { mod ->

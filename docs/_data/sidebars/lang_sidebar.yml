@@ -78,12 +78,12 @@ entries:
         url: /lang_contribution.html
         output: web, pdf
 
-  - title: Built-in DSLs
+  - title: Documentation
     output: web, pdf
     folderitems:
 
-      - title: Database Query (DBDSL)
-        url: /lang_release_notes_1.0.html
+      - title: Scientific Conversions
+        url: /lang_sci_conversions.html
         output: web, pdf
 
   - title: Developing New DSLs

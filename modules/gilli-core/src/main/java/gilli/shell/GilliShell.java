@@ -28,11 +28,6 @@ public class GilliShell
 		this((Map<String, Object>) null);
 	}
 
-	public GilliShell(File parentDirectoryOfInitConfigFiles) throws Exception
-	{
-		this((Map<String, Object>) null);
-	}
-
 	public GilliShell(Map<String, Object> variables)
 	{
 		if (variables == null)
