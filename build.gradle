@@ -15,6 +15,8 @@ ext {
     //GROOVY_VERSION = '2.4.15'
     GROOVY_VERSION = '2.5.7'
     GRADLE_TASK_GROUP_GILLI_ACTIONS = 'actions-' + name
+
+    GILLI_ANNOTATION_PROCESSING_ENABLED = false
 }
 
 rootProject.subprojects.each {println "sp : $it"}
@@ -69,8 +71,11 @@ allprojects { oneProject ->
         implementation configurations.lib
         lib configurations.groovy
 
-        if (oneProject.name != 'gilli-pre')
-            annotationProcessor project(':gilli-pre')
+        if (rootProject.GILLI_ANNOTATION_PROCESSING_ENABLED)
+        {
+            if (oneProject.name != 'gilli-pre')
+                annotationProcessor project(':gilli-pre')
+        }
 
         groovy (group: 'org.codehaus.groovy', name: 'groovy-all', version: rootProject.ext.GROOVY_VERSION)
 
