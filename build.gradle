@@ -210,3 +210,5 @@ task createDistributions(dependsOn: [beforeCompress, postBuild]) {
 assemble.dependsOn createDistributions
 
 defaultTasks 'createDistributions'
+
+println "Gradle Version : $gradle.gradleVersion"
