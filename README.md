@@ -1,5 +1,10 @@
 Complete Details in [Project Github Page](https://adithyank.github.io/gilli/)
 
+**Travis Build Status**
+
+[![Build Status](https://travis-ci.com/gilli-tools/gilli.svg?branch=master)](https://travis-ci.com/gilli-tools/gilli)
+
+
 # Gilli
 
 1. Simply, a project over [Groovy](http://groovy.apache.org/)
