@@ -8,6 +8,7 @@ class CmdLineArgsTest
     @Test
     void test1()
     {
+        //throw new RuntimeException("failing test")
     }
 }
 

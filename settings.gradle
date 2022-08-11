@@ -1,13 +1,7 @@
-def modules = [
-        'gilli-pre',
-        'gilli-core',
-        'gilli-science-conversion',
-        'gilli-cover'
-]
+file('modules').listFiles().each {file ->
 
-modules.each { mod ->
+    def mod = ":$file.name"
 
-    include ":$mod"
-    project(":$mod").projectDir = new File(settingsDir, "modules/$mod")
+    include mod
+    project(mod).projectDir = file
 }
-

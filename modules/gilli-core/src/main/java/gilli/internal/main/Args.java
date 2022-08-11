@@ -7,7 +7,7 @@ import picocli.CommandLine.Option;
 import java.io.File;
 import java.util.Map;
 
-@CommandLine.Command(sortOptions = false, synopsisHeading = "Gilli : A DSL Platform\n\n")
+@CommandLine.Command(name = "gilli", sortOptions = false, synopsisHeading = "Gilli : A DSL Platform\n\n")
 public class Args
 {
     @Option(names = {"-h", "--help"}, description = "Print Help Message and Exit")
