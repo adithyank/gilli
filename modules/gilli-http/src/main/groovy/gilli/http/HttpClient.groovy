@@ -15,6 +15,7 @@ import javax.ws.rs.client.WebTarget
 import javax.ws.rs.core.HttpHeaders
 import javax.ws.rs.core.Response
 import javax.ws.rs.core.Response.Status
+import groovy.xml.XmlSlurper
 
 class HttpClient
 {

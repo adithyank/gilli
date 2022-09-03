@@ -2,6 +2,7 @@ package gilli.util
 
 import gilli.ext.ListInstanceMethodExt
 import groovy.json.JsonSlurper
+import groovy.xml.XmlSlurper
 
 class Stdin
 {
