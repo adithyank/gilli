@@ -68,11 +68,11 @@ Reference Unit Name : `square_meter`
 | area | square_meter | square meter | - | - | 1.0 | 
 | area | are | a | - | - | 100.0 | 
 | area | barn | b | - | - | 1.0E-27 | 
-| area | circular_inch | circ in | Circle whose diameter is an inch | - | 0.0005067074790974976893076497930223922594450414180755615234375 | 
+| area | circular_inch | circ in | Circle whose diameter is an inch | - | 0.0005067074790974977 | 
 | area | acre | ac | 10 square chain | - | 4046.8564224 | 
 | area | acre_international | ac | 10 square chain | - | 4046.8564224 | 
 | area | acre_us | ac | 10 square chain of US Survey | - | 4046.872609841877 | 
 | area | board | bd | 1 inch x 1 foot | - | 0.00774192 | 
-| area | circular_mil | circ mil | Circle whose diameter is a mil | - | 5.0670747909749771032465479676971942257779346618917770683765411376953125E-10 | 
+| area | circular_mil | circ mil | Circle whose diameter is a mil | - | 5.067074790974977E-10 | 
 
 
