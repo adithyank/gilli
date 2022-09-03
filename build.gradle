@@ -13,7 +13,7 @@ ext {
     VERSION_FILE = File.createTempFile('version', '.info')
 
     //GROOVY_VERSION = '2.4.15'
-    GROOVY_VERSION = '2.5.7'
+    GROOVY_VERSION = '4.0.4'
     GRADLE_TASK_GROUP_GILLI_ACTIONS = 'actions-' + name
 
     GILLI_ANNOTATION_PROCESSING_ENABLED = false
@@ -83,8 +83,10 @@ allprojects { oneProject ->
                 annotationProcessor project(':gilli-pre')
         }
 
-        groovy(group: 'org.codehaus.groovy', name: 'groovy-all', version: rootProject.ext.GROOVY_VERSION)
-
+        groovy(group: 'org.apache.groovy', name: 'groovy', version: rootProject.ext.GROOVY_VERSION)
+        groovy(group: 'org.apache.groovy', name: 'groovy-json', version: rootProject.ext.GROOVY_VERSION)
+        groovy(group: 'org.apache.groovy', name: 'groovy-xml', version: rootProject.ext.GROOVY_VERSION)
+        lib 'info.picocli:picocli-groovy:4.6.3'
         lib(group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.8.1')
         lib(group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.8.1')
 
@@ -163,9 +165,9 @@ task copyFiles(type: Copy) {
             from p.file('app')
         }
 
-        into('docs') {
-            from p.tasks.groovydoc.outputs
-        }
+        //into('docs') {
+        //    from p.tasks.groovydoc.outputs
+        //}
 
         into('internal/lib/ext') {
             from p.configurations.lib
@@ -200,7 +202,7 @@ jar {
     }
 }
 
-task beforeCompress(dependsOn: [copyFiles, groovydoc]) {
+task beforeCompress(dependsOn: [copyFiles, /*groovydoc*/]) {
 
 }
 
