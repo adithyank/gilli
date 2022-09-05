@@ -158,6 +158,7 @@ task copyFiles(type: Copy) {
 
     println "copyFiles order : $ps"
 
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     into DISTRIBUTION_DIR
 
     ps.each { p ->
