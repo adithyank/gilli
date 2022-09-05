@@ -87,9 +87,9 @@ fi
 #echo "gilli home    = $GILLI_HOME"
 #echo "invocationdir = $INVOCATION_DIR"
 
-if [ -z $JAVA_HOME ]
+if [ -z $GILLI_JAVA_HOME ]
 then
-	echo "\$JAVA_HOME not set"
+	echo "\$GILLI_JAVA_HOME not set"
 	exit
 fi
 
@@ -140,7 +140,7 @@ SYSTEM_PROPS="$SYSTEM_PROPS -Dgilli.script.conf=$GILLI_SCRIPT_CONF_FILE"
 
 # $@ enclosed with double quotes as the space character inside an argument
 # should not split that in to multiple args 
-$JAVA_HOME/bin/java $JAVA_OPTS $SYSTEM_PROPS -cp $CLASS_PATH gilli.internal.main.GilliMain "$@"
+$GILLI_JAVA_HOME/bin/java $JAVA_OPTS $SYSTEM_PROPS -cp $CLASS_PATH gilli.internal.main.GilliMain "$@"
 
 RET=$?
 
