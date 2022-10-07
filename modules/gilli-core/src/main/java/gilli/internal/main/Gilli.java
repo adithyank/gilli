@@ -1,5 +1,8 @@
 package gilli.internal.main;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -9,7 +12,10 @@ public class Gilli
 {
     public static final String PRODUCT = "Gilli";
     public static final String SYSPROP_PREFIX = "gilli";
-    public static final String CMD = PRODUCT;
+    public static final String CMD = "gilli";
+
+    public static Logger stdout = LogManager.getLogger("gilli.stdout");
+    public static Logger stdoutWithoutTime = LogManager.getLogger("gilli.stdout.withouttime");
 
     public static void exitAbnormally()
     {

@@ -22,8 +22,9 @@ public class GilliMain
     public static final GilliMain instance = new GilliMain();
 
     private final Map<String, String> scriptConf = new HashMap<>();
-    private CommandLine cmdLine;
     private Args parsedArgs = new Args();
+
+    private CommandLine cmdLine = new CommandLine(parsedArgs);
 
     private GilliShell defaultShell;
 
@@ -129,7 +130,7 @@ public class GilliMain
         }
     }
 
-    private void exec()
+    public void exec()
     {
         if (parsedArgs.isHelp())
         {
@@ -297,7 +298,10 @@ public class GilliMain
 
         //args = new String[] {"-p", "2/33", "--keepRunning"};
 
-        instance.init(args);
-        instance.exec();
+        //instance.init(args);
+        //instance.exec();
+        instance.cmdLine.setUsageHelpWidth((int) (ConsoleInputs.CONSOLE_COLS * 0.6f));
+        instance.fillScriptConf();
+        instance.cmdLine.execute(args);
     }
 }

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration status="ERROR" monitorInterval="180">
+
+    <Appenders>
+
+        <Console name="gilli.console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%4p %d : %m%n"/>
+        </Console>
+
+        <Console name="gilli.stdout" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d : %m%n"/>
+        </Console>
+
+        <Console name="gilli.stdout.withouttime" target="SYSTEM_OUT">
+            <PatternLayout pattern="%m%n"/>
+        </Console>
+
+    </Appenders>
+
+    <Loggers>
+
+	    <!--Dont change the Level. It has to be INFO only. Specific to designed outputs in the console.
+	        Used by logger instances in the Util class
+	    -->
+	    <Logger name="gilli.stdout" level="INFO" additivity="false">
+		    <AppenderRef ref="gilli.stdout"/>
+	    </Logger>
+
+	    <!--Dont change the Level. It has to be INFO only. Specific to designed outputs in the console.
+	        Used by logger instances in the Util class
+	    -->
+	    <Logger name="gilli.stdout.withouttime" level="INFO" additivity="false">
+		    <AppenderRef ref="gilli.stdout.withouttime"/>
+	    </Logger>
+
+	    <Root level="ERROR">
+            <AppenderRef ref="gilli.console"/>
+        </Root>
+	    
+    </Loggers>
+	
+</Configuration>

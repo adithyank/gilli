@@ -1,5 +1,7 @@
 package gilli.internal.main;
 
+import gilli.pwd.PasswordStore;
+import gilli.pwd.PwdStoreSubCommand;
 import gilli.util.GeneralUtil;
 import picocli.CommandLine;
 import picocli.CommandLine.Option;
@@ -7,8 +9,9 @@ import picocli.CommandLine.Option;
 import java.io.File;
 import java.util.Map;
 
-@CommandLine.Command(name = "gilli", sortOptions = false, synopsisHeading = "Gilli : A DSL Platform\n\n")
-public class Args
+@CommandLine.Command(name = "gilli", sortOptions = false, synopsisHeading = "Gilli : A DSL Platform\n\n",
+subcommands = {PasswordStore.class})
+public class Args implements Runnable
 {
     @Option(names = {"-h", "--help"}, description = "Print Help Message and Exit")
     private boolean help = false;
@@ -108,4 +111,9 @@ public class Args
         return keepRunning;
     }
 
+    @Override
+    public void run()
+    {
+        GilliMain.instance.exec();
+    }
 }

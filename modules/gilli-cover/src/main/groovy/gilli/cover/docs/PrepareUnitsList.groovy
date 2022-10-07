@@ -1,6 +1,6 @@
 package gilli.cover.docs
 
-import gilli.cover.CoverMain
+
 import gilli.sci.unit.UnitConversionSpec
 import gilli.sci.unit.Units
 

@@ -1,8 +1,6 @@
 package gilli.http
 
 import gilli.util.DslUtil
-import gilli.util.MapClosureDelegate
-import groovy.json.JsonBuilder
 import groovy.json.JsonDelegate
 import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
