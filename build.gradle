@@ -9,7 +9,7 @@ ext {
 
     buildType = 'ga' //beta
 
-    DISTRIBUTION_DIR = project.buildDir.absolutePath + File.separator + 'collectedFiles' + File.separator + name
+    DISTRIBUTION_DIR = project.buildDir.absolutePath + File.separator + 'gilli-dist' + File.separator + name
     VERSION_FILE = File.createTempFile('version', '.info')
 
     //GROOVY_VERSION = '2.4.15'
@@ -26,6 +26,7 @@ rootProject.subprojects.each {println "subproject : $it"}
 allprojects { oneProject ->
 
     apply plugin: 'groovy'
+    apply plugin: 'java-library'
 
     sourceCompatibility = '1.8'
     targetCompatibility = '1.8'
@@ -94,7 +95,7 @@ allprojects { oneProject ->
         testImplementation(group: 'org.testng', name: 'testng', version: '6.8')
         lib(group: 'org.glassfish.jersey.core', name: 'jersey-client', version: '2.28')
         lib(group: 'org.glassfish.jersey.inject', name: 'jersey-hk2', version: '2.28')
-
+        lib 'javax.activation:activation:1.1.1'
         //lib(group: 'io.github.classgraph', name: 'classgraph', version: '4.8.48')
     }
 
