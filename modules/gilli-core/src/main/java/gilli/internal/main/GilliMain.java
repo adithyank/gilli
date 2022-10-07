@@ -103,10 +103,10 @@ public class GilliMain
      *
      * @return
      */
-    public GilliShell shell()
+    public GilliShell shell(Map<String, ?> variables)
     {
         if (defaultShell == null)
-            defaultShell = new GilliShell();
+            defaultShell = new GilliShell(variables);
 
         return defaultShell;
     }
@@ -154,7 +154,7 @@ public class GilliMain
      */
     private void execute()
     {
-        shell();
+        shell(parsedArgs.getVariables());
 
         ExecState state = ExecState.INVALID_INPUTS;
 

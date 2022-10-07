@@ -111,6 +111,11 @@ public class Args implements Runnable
         return keepRunning;
     }
 
+    public Map<String, String> getVariables()
+    {
+        return variables;
+    }
+
     @Override
     public void run()
     {
