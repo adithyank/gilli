@@ -157,7 +157,7 @@ task copyFiles(type: Copy) {
     ps.addAll(subprojects)
     ps.add(project)
 
-    println "copyFiles order : $ps"
+    println "copyFiles order : ${ps.collect {it.name}}"
 
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     into DISTRIBUTION_DIR
