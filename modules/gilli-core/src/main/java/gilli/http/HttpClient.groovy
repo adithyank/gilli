@@ -181,6 +181,10 @@ class HttpResponseDelegate
         c.call(root)
     }
 
+    void text(@ClosureParams(value = SimpleType, options = ['String']) Closure c) {
+        c.call(storedFile.text)
+    }
+
     void eachLine(@ClosureParams(value = SimpleType, options = ['String']) Closure c) {
         storedFile.eachLine { c.call(it) }
     }
