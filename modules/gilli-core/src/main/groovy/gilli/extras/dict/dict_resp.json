@@ -1,0 +1,336 @@
+[
+  {
+    "license" : {
+      "name" : "CC BY-SA 3.0",
+      "url" : "https://creativecommons.org/licenses/by-sa/3.0"
+    },
+    "meanings" : [
+      {
+        "antonyms" : [],
+        "definitions" : [
+          {
+            "antonyms" : [],
+            "definition" : "A high point or position, literally or figuratively; an elevated place; a superior region; a height; the sky; heaven.",
+            "synonyms" : []
+          },
+          {
+            "antonyms" : [],
+            "definition" : "A point of success or achievement; a time when things are at their best.",
+            "example" : "It was one of the highs of his career.",
+            "synonyms" : []
+          },
+          {
+            "antonyms" : [],
+            "definition" : "A period of euphoria, from excitement or from an intake of drugs.",
+            "example" : "That pill gave me a high for a few hours, before I had a comedown.",
+            "synonyms" : []
+          },
+          {
+            "antonyms" : [],
+            "definition" : "A drug that gives such a high.",
+            "synonyms" : []
+          },
+          {
+            "antonyms" : [],
+            "definition" : "A large area of elevated atmospheric pressure; an anticyclone.",
+            "example" : "A large high is centred on the Azores.",
+            "synonyms" : []
+          },
+          {
+            "antonyms" : [],
+            "definition" : "The maximum value attained by some quantity within a specified period.",
+            "example" : "Inflation reached a ten-year high.",
+            "synonyms" : []
+          },
+          {
+            "antonyms" : [],
+            "definition" : "The maximum atmospheric temperature recorded at a particular location, especially during one 24-hour period.",
+            "example" : "Today's high was 32°C.",
+            "synonyms" : []
+          },
+          {
+            "antonyms" : [],
+            "definition" : "The highest card dealt or drawn.",
+            "synonyms" : []
+          }
+        ],
+        "partOfSpeech" : "noun",
+        "synonyms" : []
+      },
+      {
+        "antonyms" : [],
+        "definitions" : [
+          {
+            "antonyms" : [],
+            "definition" : "To rise.",
+            "example" : "The sun higheth.",
+            "synonyms" : []
+          }
+        ],
+        "partOfSpeech" : "verb",
+        "synonyms" : []
+      },
+      {
+        "antonyms" : [
+          "low"
+        ],
+        "definitions" : [
+          {
+            "antonyms" : [],
+            "definition" : "Very elevated; extending or being far above a base; tall; lofty.",
+            "example" : "The balloon rose high in the sky.   The wall was high.   a high mountain",
+            "synonyms" : []
+          },
+          {
+            "antonyms" : [],
+            "definition" : "Relatively elevated; rising or raised above the average or normal level from which elevation is measured.",
+            "synonyms" : []
+          },
+          {
+            "antonyms" : [],
+            "definition" : "Having a specified elevation or height; tall.",
+            "example" : "three feet high   three Mount Everests high",
+            "synonyms" : []
+          },
+          {
+            "antonyms" : [],
+            "definition" : "Elevated in status, esteem, prestige; exalted in rank, station, or character.",
+            "example" : "The oldest of the elves' royal family still conversed in High Elvish.",
+            "synonyms" : []
+          },
+          {
+            "antonyms" : [],
+            "definition" : "Of great importance and consequence: grave (if negative) or solemn (if positive).",
+            "example" : "high crimes, the high festival of the sun",
+            "synonyms" : []
+          },
+          {
+            "antonyms" : [],
+            "definition" : "Consummate; advanced (e.g. in development) to the utmost extent or culmination, or possessing a quality in its supreme degree, at its zenith.",
+            "example" : "high (i.e. intense) heat; high (i.e. full or quite) noon; high (i.e. rich or spicy) seasoning; high (i.e. complete) pleasure; high (i.e. deep or vivid) colour; high (i.e. extensive, thorough) scholarship; high tide; high [tourism] season; the High Middle Ages",
+            "synonyms" : []
+          },
+          {
+            "antonyms" : [],
+            "definition" : "(in several set phrases) Remote in distance or time.",
+            "example" : "high latitude, high antiquity",
+            "synonyms" : []
+          },
+          {
+            "antonyms" : [],
+            "definition" : "(in several set phrases) Very traditionalist and conservative, especially in favoring older ways of doing things; see e.g. high church, High Tory.",
+            "synonyms" : []
+          },
+          {
+            "antonyms" : [],
+            "definition" : "Elevated in mood; marked by great merriment, excitement, etc.",
+            "example" : "in high spirits",
+            "synonyms" : []
+          },
+          {
+            "antonyms" : [],
+            "definition" : "(of a lifestyle) Luxurious; rich.",
+            "example" : "high living, the high life",
+            "synonyms" : []
+          },
+          {
+            "antonyms" : [],
+            "definition" : "Lofty, often to the point of arrogant, haughty, boastful, proud.",
+            "example" : "a high tone",
+            "synonyms" : []
+          },
+          {
+            "antonyms" : [],
+            "definition" : "(with \"on\" or \"about\") Keen, enthused.",
+            "synonyms" : []
+          },
+          {
+            "antonyms" : [],
+            "definition" : "(of a body of water) With tall waves.",
+            "synonyms" : []
+          },
+          {
+            "antonyms" : [],
+            "definition" : "Large, great (in amount or quantity, value, force, energy, etc).",
+            "example" : "My bank charges me a high interest rate.   I was running a high temperature and had high cholesterol.   high voltage   high prices   high winds   a high number",
+            "synonyms" : []
+          },
+          {
+            "antonyms" : [],
+            "definition" : "(acoustics) Acute or shrill in pitch, due to being of greater frequency, i.e. produced by more rapid vibrations (wave oscillations).",
+            "example" : "The note was too high for her to sing.",
+            "synonyms" : []
+          },
+          {
+            "antonyms" : [],
+            "definition" : "Made with some part of the tongue positioned high in the mouth, relatively close to the palate.",
+            "synonyms" : []
+          },
+          {
+            "antonyms" : [],
+            "definition" : "Greater in value than other cards, denominations, suits, etc.",
+            "synonyms" : []
+          },
+          {
+            "antonyms" : [],
+            "definition" : "(of meat, especially venison) Strong-scented; slightly tainted/spoiled; beginning to decompose.",
+            "example" : "Epicures do not cook game before it is high.",
+            "synonyms" : []
+          },
+          {
+            "antonyms" : [],
+            "definition" : "Intoxicated; under the influence of a mood-altering drug, formerly usually alcohol, but now (from the mid-20th century) usually not alcohol but rather marijuana, cocaine, heroin, etc.",
+            "synonyms" : []
+          },
+          {
+            "antonyms" : [],
+            "definition" : "(of a sailing ship) Near, in its direction of travel, to the (direction of the) wind.",
+            "synonyms" : []
+          }
+        ],
+        "partOfSpeech" : "adjective",
+        "synonyms" : []
+      },
+      {
+        "antonyms" : [],
+        "definitions" : [
+          {
+            "antonyms" : [],
+            "definition" : "In or to an elevated position.",
+            "example" : "How high above land did you fly?",
+            "synonyms" : []
+          },
+          {
+            "antonyms" : [],
+            "definition" : "In or at a great value.",
+            "example" : "Costs have grown higher this year again.",
+            "synonyms" : []
+          },
+          {
+            "antonyms" : [],
+            "definition" : "At a pitch of great frequency.",
+            "example" : "I certainly can't sing that high.",
+            "synonyms" : []
+          }
+        ],
+        "partOfSpeech" : "adverb",
+        "synonyms" : []
+      }
+    ],
+    "phonetic" : "/haɪ/",
+    "phonetics" : [
+      {
+        "audio" : "https://api.dictionaryapi.dev/media/pronunciations/en/high-uk.mp3",
+        "license" : {
+          "name" : "BY 3.0 US",
+          "url" : "https://creativecommons.org/licenses/by/3.0/us"
+        },
+        "sourceUrl" : "https://commons.wikimedia.org/w/index.php?curid=9022000",
+        "text" : "/haɪ/"
+      },
+      {
+        "audio" : "https://api.dictionaryapi.dev/media/pronunciations/en/high-us.mp3",
+        "license" : {
+          "name" : "BY-SA 3.0",
+          "url" : "https://creativecommons.org/licenses/by-sa/3.0"
+        },
+        "sourceUrl" : "https://commons.wikimedia.org/w/index.php?curid=1227443",
+        "text" : "/haɪ/"
+      }
+    ],
+    "sourceUrls" : [
+      "https://en.wiktionary.org/wiki/high"
+    ],
+    "word" : "high"
+  },
+  {
+    "license" : {
+      "name" : "CC BY-SA 3.0",
+      "url" : "https://creativecommons.org/licenses/by-sa/3.0"
+    },
+    "meanings" : [
+      {
+        "antonyms" : [],
+        "definitions" : [
+          {
+            "antonyms" : [],
+            "definition" : "Thought; intention; determination; purpose.",
+            "synonyms" : []
+          }
+        ],
+        "partOfSpeech" : "noun",
+        "synonyms" : []
+      }
+    ],
+    "phonetic" : "/haɪ/",
+    "phonetics" : [
+      {
+        "audio" : "https://api.dictionaryapi.dev/media/pronunciations/en/high-uk.mp3",
+        "license" : {
+          "name" : "BY 3.0 US",
+          "url" : "https://creativecommons.org/licenses/by/3.0/us"
+        },
+        "sourceUrl" : "https://commons.wikimedia.org/w/index.php?curid=9022000",
+        "text" : "/haɪ/"
+      },
+      {
+        "audio" : "https://api.dictionaryapi.dev/media/pronunciations/en/high-us.mp3",
+        "license" : {
+          "name" : "BY-SA 3.0",
+          "url" : "https://creativecommons.org/licenses/by-sa/3.0"
+        },
+        "sourceUrl" : "https://commons.wikimedia.org/w/index.php?curid=1227443",
+        "text" : "/haɪ/"
+      }
+    ],
+    "sourceUrls" : [
+      "https://en.wiktionary.org/wiki/high"
+    ],
+    "word" : "high"
+  },
+  {
+    "license" : {
+      "name" : "CC BY-SA 3.0",
+      "url" : "https://creativecommons.org/licenses/by-sa/3.0"
+    },
+    "meanings" : [
+      {
+        "antonyms" : [],
+        "definitions" : [
+          {
+            "antonyms" : [],
+            "definition" : "To hie; to hasten.",
+            "synonyms" : []
+          }
+        ],
+        "partOfSpeech" : "verb",
+        "synonyms" : []
+      }
+    ],
+    "phonetic" : "/haɪ/",
+    "phonetics" : [
+      {
+        "audio" : "https://api.dictionaryapi.dev/media/pronunciations/en/high-uk.mp3",
+        "license" : {
+          "name" : "BY 3.0 US",
+          "url" : "https://creativecommons.org/licenses/by/3.0/us"
+        },
+        "sourceUrl" : "https://commons.wikimedia.org/w/index.php?curid=9022000",
+        "text" : "/haɪ/"
+      },
+      {
+        "audio" : "https://api.dictionaryapi.dev/media/pronunciations/en/high-us.mp3",
+        "license" : {
+          "name" : "BY-SA 3.0",
+          "url" : "https://creativecommons.org/licenses/by-sa/3.0"
+        },
+        "sourceUrl" : "https://commons.wikimedia.org/w/index.php?curid=1227443",
+        "text" : "/haɪ/"
+      }
+    ],
+    "sourceUrls" : [
+      "https://en.wiktionary.org/wiki/high"
+    ],
+    "word" : "high"
+  }
+]
