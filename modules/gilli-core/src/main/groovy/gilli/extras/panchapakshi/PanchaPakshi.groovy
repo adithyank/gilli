@@ -189,7 +189,7 @@ class PanchaPakshiCharter
 
     static void printChart(String address, String yyyy_mm_dd, boolean valarPirai)
     {
-        Gilli.stdout.info("Starting...")
+        Gilli.stdout.info("Given Arguments: Address: $address, yyyy_mm_dd: $yyyy_mm_dd, valarpirai: $valarPirai")
         Date date = YYYY_MM_DD.parse(yyyy_mm_dd)
 
         HourMinuteSec sunrise = SunriseGetter.getSunRiseTime(address, yyyy_mm_dd)
