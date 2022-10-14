@@ -1,7 +1,8 @@
 package gilli.internal.main;
 
+import gilli.extras.dict.DictionaryCmdLine;
+import gilli.extras.panchapakshi.PanchaPakshiCmd;
 import gilli.pwd.PasswordStore;
-import gilli.pwd.PwdStoreSubCommand;
 import gilli.util.GeneralUtil;
 import picocli.CommandLine;
 import picocli.CommandLine.Option;
@@ -10,7 +11,7 @@ import java.io.File;
 import java.util.Map;
 
 @CommandLine.Command(name = "gilli", sortOptions = false, synopsisHeading = "Gilli : A DSL Platform\n\n",
-subcommands = {PasswordStore.class})
+subcommands = {PasswordStore.class, PanchaPakshiCmd.class, DictionaryCmdLine.class})
 public class Args implements Runnable
 {
     @Option(names = {"-h", "--help"}, description = "Print Help Message and Exit")
