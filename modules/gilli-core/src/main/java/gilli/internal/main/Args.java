@@ -11,11 +11,11 @@ import java.io.File;
 import java.util.Map;
 
 @CommandLine.Command(name = "gilli", sortOptions = false, synopsisHeading = "Gilli : A DSL Platform\n\n",
-subcommands = {PasswordStore.class, PanchaPakshiCmd.class, DictionaryCmdLine.class})
+subcommands = {HelpCommand.class, PasswordStore.class, PanchaPakshiCmd.class, DictionaryCmdLine.class})
 public class Args implements Runnable
 {
-    @Option(names = {"-h", "--help"}, description = "Print Help Message and Exit")
-    private boolean help = false;
+//    @Option(names = {"-h", "--help"}, description = "Print Help Message and Exit")
+//    private boolean help = false;
 
     @Option(names = {"-v", "--version"}, description = "Print Gilli Version and Exit")
     private boolean version;
@@ -44,9 +44,9 @@ public class Args implements Runnable
     @Option(names = {"-k", "--keepRunning"}, description = "Makes the " + Gilli.PRODUCT + " keep running even after the execution is over. An option for daemon works. default : ${DEFAULT-VALUE}")
     private boolean keepRunning = false;
 
-    public boolean isHelp() {
-        return help;
-    }
+//    public boolean isHelp() {
+//        return help;
+//    }
 
     public boolean hasFileToExecute()
     {

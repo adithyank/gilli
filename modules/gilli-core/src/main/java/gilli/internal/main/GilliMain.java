@@ -22,9 +22,9 @@ public class GilliMain
     public static final GilliMain instance = new GilliMain();
 
     private final Map<String, String> scriptConf = new HashMap<>();
-    private Args parsedArgs = new Args();
+    private final Args parsedArgs = new Args();
 
-    private CommandLine cmdLine = new CommandLine(parsedArgs);
+    public final CommandLine cmdLine = new CommandLine(parsedArgs);
 
     private GilliShell defaultShell;
 
@@ -72,31 +72,6 @@ public class GilliMain
         }
     }
 
-    private void init(String[] args)
-    {
-        parseArgs(args);
-        fillScriptConf();
-    }
-
-    private void parseArgs(String[] args)
-    {
-        cmdLine = new CommandLine(parsedArgs);
-
-        cmdLine.setUsageHelpWidth((int) (ConsoleInputs.CONSOLE_COLS * 0.6f));
-
-        try
-        {
-            cmdLine.parse(args);
-        }
-        catch (Exception ex)
-        {
-            System.err.println(ex.getMessage());
-            System.err.println();
-            cmdLine.usage(System.err);
-            Gilli.exitAbnormally();
-        }
-    }
-
     /**
      * TODO : May create issues if this method is called concurrently... :(
      * To think whether this method will be called concurrently as it is in Main class...
@@ -132,12 +107,12 @@ public class GilliMain
 
     public void exec()
     {
-        if (parsedArgs.isHelp())
-        {
-            cmdLine.usage(System.out);
-            Gilli.exitNormally();
-        }
-        else if (parsedArgs.isVersion())
+//        if (parsedArgs.isHelp())
+//        {
+//            cmdLine.usage(System.out);
+//            Gilli.exitNormally();
+//        }
+        if (parsedArgs.isVersion())
         {
             doVersionWork();
             Gilli.exitNormally();
