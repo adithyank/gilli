@@ -1,18 +1,15 @@
 plugins {
-
     id 'groovy'
 }
 
 version = '0.1'
 
 ext {
-
     buildType = 'ga' //beta
 
     DISTRIBUTION_DIR = project.buildDir.absolutePath + File.separator + 'gilli-dist' + File.separator + name
     VERSION_FILE = File.createTempFile('version', '.info')
 
-    //GROOVY_VERSION = '2.4.15'
     GROOVY_VERSION = '4.0.4'
     GRADLE_TASK_GROUP_GILLI_ACTIONS = 'actions-' + name
 
@@ -21,18 +18,14 @@ ext {
 
 rootProject.subprojects.each {println "subproject : $it"}
 
-
-
 allprojects { oneProject ->
-
     apply plugin: 'groovy'
     apply plugin: 'java-library'
 
-    sourceCompatibility = '1.8'
-    targetCompatibility = '1.8'
+    sourceCompatibility = '19'
+    targetCompatibility = '19'
 
     repositories {
-
         mavenCentral()
     }
 
@@ -49,33 +42,25 @@ allprojects { oneProject ->
                 srcDirs = []
             }    // no source dirs for the java compiler
             groovy { srcDirs = ['src/test/java', 'src/test/groovy'] }  // compile everything in src/ with groovy
-
         }
     }
 
     compileGroovy {
-
         options.fork = true
-
         //options.forkOptions.memoryMaximumSize = "2g"
-
         options.incremental = true
-
     }
 
     compileTestGroovy {
-
         groovyOptions.fileExtensions += 'gilli'
     }
 
     configurations {
-
         groovy
         lib
     }
 
     dependencies {
-
         implementation configurations.lib
         lib configurations.groovy
 
@@ -98,7 +83,6 @@ allprojects { oneProject ->
         lib 'javax.activation:activation:1.1.1'
         //lib(group: 'io.github.classgraph', name: 'classgraph', version: '4.8.48')
     }
-
 
     test {
         // enable TestNG support (default is JUnit)
@@ -135,9 +119,8 @@ allprojects { oneProject ->
 }
 
 task testGilli(type: JavaExec) {
-
     classpath = sourceSets.test.runtimeClasspath
-    main = 'gilli.tester.TestNgRunner'
+    mainClass = 'gilli.tester.TestNgRunner'
 
     def a = []
     allprojects.each {a.addAll(it.sourceSets.test.allSource)}
@@ -151,7 +134,6 @@ dependencies
 }
 
 task copyFiles(type: Copy) {
-
     List<Project> ps = []
 
     ps.addAll(subprojects)
@@ -183,9 +165,7 @@ task copyFiles(type: Copy) {
 }
 
 task prepareVersionFile {
-
     doLast {
-
         def text = "Gilli version               : $version \n"
         text    += "Build Time                  : ${new Date()} + \n"
         text    += "Embedded Groovy Version     : $GROOVY_VERSION"
@@ -195,49 +175,36 @@ task prepareVersionFile {
 }
 
 jar {
-
     dependsOn prepareVersionFile
 
     into ('') {
-
         from VERSION_FILE
         rename VERSION_FILE.name, 'gilli-version.info'
     }
 }
 
 task beforeCompress(dependsOn: [copyFiles, /*groovydoc*/]) {
-
 }
 
 task compress(type: Zip, dependsOn: beforeCompress) {
-
     from DISTRIBUTION_DIR
     into project.name
 }
 
 task postBuild(type: JavaExec) {
-
     outputs.upToDateWhen { false }
-
     classpath = sourceSets.main.runtimeClasspath
-
-    main = 'gilli.cover.CoverMain'
-
+    mainClass = 'gilli.cover.CoverMain'
     args project.projectDir
 }
 
 task createDistributions(dependsOn: [beforeCompress, postBuild]) {
-
     group = GRADLE_TASK_GROUP_GILLI_ACTIONS
-
     doLast {
-
         println "Build done !"
     }
 }
 
 assemble.dependsOn createDistributions
-
 defaultTasks 'createDistributions'
-
 println "Gradle Version : $gradle.gradleVersion"
