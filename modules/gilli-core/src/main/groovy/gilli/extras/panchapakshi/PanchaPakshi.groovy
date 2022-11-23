@@ -3,6 +3,7 @@ package gilli.extras.panchapakshi
 import gilli.extras.geo.Geo
 import gilli.http.HttpClient
 import gilli.internal.main.Gilli
+import gilli.util.GeneralUtil
 import gilli.util.dataframe.DataFrame
 import groovy.transform.ToString
 
@@ -189,6 +190,9 @@ class PanchaPakshiCharter
 
     static void printChart(String address, String yyyy_mm_dd, boolean valarPirai)
     {
+        if (!GeneralUtil.hasValue(yyyy_mm_dd))
+            yyyy_mm_dd = YYYY_MM_DD.format(new Date())
+
         Gilli.stdout.info("Given Arguments: Address: $address, yyyy_mm_dd: $yyyy_mm_dd, valarpirai: $valarPirai")
         Date date = YYYY_MM_DD.parse(yyyy_mm_dd)
 

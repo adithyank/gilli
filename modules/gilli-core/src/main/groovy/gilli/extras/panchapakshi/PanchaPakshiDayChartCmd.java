@@ -8,7 +8,7 @@ public class PanchaPakshiDayChartCmd implements Runnable
     @CommandLine.Option(names = {"-a", "--address"}, description = "Address to which the chart needs to be printed", required = true)
     private String location;
 
-    @CommandLine.Option(names = {"-d", "--date"}, description = "Date for which the chart needs to be printed", required = true)
+    @CommandLine.Option(names = {"-d", "--date"}, description = "Date for which the chart needs to be printed")
     private String date_yyyy_mm_dd;
 
     @CommandLine.Option(names = {"--valarpirai"}, description = "Given date is valar pirai. [true|false]. default: true")
