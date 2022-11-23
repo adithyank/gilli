@@ -5,10 +5,15 @@ import gilli.extras.panchapakshi.PanchaPakshiCmd;
 import gilli.pwd.PasswordStore;
 import gilli.util.GeneralUtil;
 import picocli.CommandLine;
+import picocli.CommandLine.Model.CommandSpec;
 import picocli.CommandLine.Option;
+import picocli.CommandLine.Parameters;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @CommandLine.Command(name = "gilli", sortOptions = false, synopsisHeading = "Gilli : A DSL Platform\n\n",
 subcommands = {HelpCommand.class, PasswordStore.class, PanchaPakshiCmd.class, DictionaryCmdLine.class})
@@ -20,8 +25,8 @@ public class Args implements Runnable
     @Option(names = {"-v", "--version"}, description = "Print Gilli Version and Exit")
     private boolean version;
 
-    @Option(names = {"-f", "--file"}, description = "Script File For Execution")
-    private File file;
+    //setter method defines the parameter
+    private File[] files;
 
     @Option(names = {"-e", "--exec"}, description = "Script Text For Execution")
     private String scriptText;
@@ -44,17 +49,36 @@ public class Args implements Runnable
     @Option(names = {"-k", "--keepRunning"}, description = "Makes the " + Gilli.PRODUCT + " keep running even after the execution is over. An option for daemon works. default : ${DEFAULT-VALUE}")
     private boolean keepRunning = false;
 
+    @CommandLine.Spec
+    CommandSpec spec; // injected by picocli
+
 //    public boolean isHelp() {
 //        return help;
 //    }
 
-    public boolean hasFileToExecute()
+    @Parameters(index = "0..*", description = "Gilli script files to execute")
+    public void setFiles(File[] files)
     {
-        return file != null;
+        List<File> errorFiles = Arrays.stream(files).filter(Gilli::invalidScriptExtension).collect(Collectors.toList());
+
+        if (!GeneralUtil.isEmpty(errorFiles))
+            throw new CommandLine.ParameterException(spec.commandLine(), "Script file extension is not 'gilli' for files: " + errorFiles.stream().map(File::getAbsolutePath).collect(Collectors.toList()));
+
+        List<File> notAvailableFiles = Arrays.stream(files).filter(f -> !f.exists()).collect(Collectors.toList());
+
+        if (!GeneralUtil.isEmpty(notAvailableFiles))
+            throw new CommandLine.ParameterException(spec.commandLine(), "File(s) not found: " + notAvailableFiles.stream().map(File::getAbsolutePath).collect(Collectors.toList()));
+
+        this.files = files;
     }
 
-    public File getFile() {
-        return file;
+    public boolean hasFilesToExecute()
+    {
+        return files != null && files.length > 0;
+    }
+
+    public File[] getFiles() {
+        return files;
     }
 
     public boolean isVersion() {

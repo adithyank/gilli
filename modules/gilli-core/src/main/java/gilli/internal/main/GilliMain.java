@@ -7,7 +7,9 @@ import gilli.util.GeneralUtil;
 import gilli.util.Stdin;
 import picocli.CommandLine;
 
+import java.io.File;
 import java.io.FileReader;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -133,9 +135,15 @@ public class GilliMain
 
         ExecState state = ExecState.INVALID_INPUTS;
 
-        if (parsedArgs.hasFileToExecute())
+        if (parsedArgs.hasFilesToExecute())
         {
-            state = run(() -> defaultShell.runScriptFile(parsedArgs.getFile()));
+            state = run(() ->
+            {
+                for (File file : parsedArgs.getFiles())
+                    defaultShell.runScriptFile(file);
+
+                return true;
+            });
         }
 
         if (parsedArgs.hasScriptTextToExecuteWithoutStdinReading())
@@ -178,7 +186,7 @@ public class GilliMain
 
                 state = run(() -> Stdin.execLikeAwk(c));
             }
-            else if (parsedArgs.hasFileToExecute())
+            else if (parsedArgs.hasFilesToExecute())
             {
                 //TODO : yet to implement : https://github.com/adithyank/gilli/issues/5
                 state = ExecState.EXECUTED_AND_NORMAL;
