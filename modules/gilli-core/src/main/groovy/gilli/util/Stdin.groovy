@@ -41,6 +41,11 @@ class Stdin
     {
         new XmlSlurper().parse(System.in)
     }
+
+    static Object getJson()
+    {
+        return json();
+    }
 }
 
 class ComplexClosureInfo
