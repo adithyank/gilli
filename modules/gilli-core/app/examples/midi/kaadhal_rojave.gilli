@@ -1,0 +1,7 @@
+def kaadhal_rojave_1 = [s[4], g1[4], r2[2], s[2], l1n2[4]]
+def kaadhal_rojave_2 = [s[4], g1[4], r2[2], s[2], l1n2[4]]
+def kaadhal_rojave_3 = [s[4], g2[4], s, r2, g2, m1, p[4], g1[3], r2[5]]
+
+cplay(panflute, 200, kaadhal_rojave_1)
+cplay(panflute, 200, kaadhal_rojave_2)
+cplay(panflute, 200, kaadhal_rojave_3)

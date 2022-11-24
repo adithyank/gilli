@@ -1,0 +1,23 @@
+import gilli.extras.midi.InstrumentName
+import gilli.extras.midi.Midi
+import static gilli.extras.midi.carnatic.CarnaticNotes.*
+
+def national_anthem_first_line = [s, r2, g2, g2, g2, g2, g2, g2, g2[2], g2, g2, r2, g2, m1[2], g2[2], g2, g2, r2[2], r2, r2, l1n2, r2, s[4]]
+
+Midi.music {
+
+	channel(1) {
+
+//		instrument InstrumentName.violin1
+        instrument InstrumentName.instruments[1]
+
+		oneNoteDuration 300
+
+		play national_anthem_first_line
+	}
+}
+
+//Midi.cplay(InstrumentName.violin1, 300, national_anthem_first_line)
+
+//Midi.cplay(InstrumentName.panflute, 300, national_anthem_first_line)
+
