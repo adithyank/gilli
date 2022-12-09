@@ -162,6 +162,16 @@ enum Pakshi
     {
         this.equivalentPanchaBootham = panchaBootham
     }
+
+    String first2Chars()
+    {
+        return name().substring(0, 2);
+    }
+
+    static Set<String> first2CharsSet()
+    {
+        return values().collect {it.name().substring(0, 2)}.toSet()
+    }
 }
 
 enum Thozil
@@ -171,6 +181,11 @@ enum Thozil
     ARASU,
     THUYIL,
     SAAVU
+
+    static Set<String> firstCharSet()
+    {
+        return values().collect{it.name().substring(0, 1)}.toSet()
+    }
 }
 
 enum PanchaBootham
@@ -188,20 +203,23 @@ class PanchaPakshiCharter
     static SimpleDateFormat YYYY_MM_DD = new SimpleDateFormat("yyyy_MM_dd")
     static SimpleDateFormat DAY = new SimpleDateFormat("EEEE")
 
-    static void printChart(String address, String yyyy_mm_dd, boolean valarPirai)
+    static void printChart(String address, String yyyy_mm_dd, boolean valarPirai, String bwFilter)
     {
+        if (!GeneralUtil.hasValue(address))
+            address = Geo.currentCity
+
         if (!GeneralUtil.hasValue(yyyy_mm_dd))
             yyyy_mm_dd = YYYY_MM_DD.format(new Date())
 
-        Gilli.stdout.info("Given Arguments: Address: $address, yyyy_mm_dd: $yyyy_mm_dd, valarpirai: $valarPirai")
+        Gilli.stdout.info("Given Arguments: Address: $address, yyyy_mm_dd: $yyyy_mm_dd, valarpirai: $valarPirai, bwFilter: $bwFilter")
         Date date = YYYY_MM_DD.parse(yyyy_mm_dd)
 
         HourMinuteSec sunrise = SunriseGetter.getSunRiseTime(address, yyyy_mm_dd)
 
-        printChart(sunrise.h, sunrise.m, DAY.format(date), valarPirai)
+        printChart(sunrise.h, sunrise.m, DAY.format(date), valarPirai, bwFilter)
     }
 
-    static void printChart(int sunRiseHours, int sunRiseMinutes, String tamilDayString, boolean valarPirai)
+    static void printChart(int sunRiseHours, int sunRiseMinutes, String tamilDayString, boolean valarPirai, String bwFilter)
     {
         Day day = Day.valueOf(tamilDayString.toUpperCase())
 
@@ -242,7 +260,10 @@ class PanchaPakshiCharter
                     int minsoffset = paksham.minutes(thozil)
                     sunrise.add(Calendar.MINUTE, minsoffset)
                     String end = HOURMINS.format(sunrise.getTime())
-                    d.row(paksham.name(), jamamNo, finalPakshiOrder[ak], thozil, paksham.naazhigai(thozil), minsoffset, start, end)
+
+                    if (bwFilter == null || bwFilter.empty|| (finalPakshiOrder[ak].name().substring(0, 2).equals(bwFilter.substring(0, 2))
+                        && thozil.name().charAt(0) == bwFilter.charAt(2)))
+                        d.row(paksham.name(), jamamNo, finalPakshiOrder[ak], thozil, paksham.naazhigai(thozil), minsoffset, start, end)
                 }
 
             }
@@ -296,8 +317,6 @@ class SunriseGetter
 
                     String rise = root.results.sunrise
 
-                    println "risee = " + rise
-
                     int h = rise.takeBefore(':').toInteger()
 
                     //int m = rise.substring(3, 5).toInteger()
@@ -323,9 +342,6 @@ class SunriseGetter
                     cal.add(Calendar.MINUTE, 30)
 
                     ret = new HourMinuteSec(cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE))
-
-                    println "ret = $ret"
-                    //println "converted = " + calendar.toInstant().atZone(ZoneId.of("Asia/Kolkata"))
                 }
             }
         }
@@ -337,15 +353,3 @@ class Ammavasya
 {
 
 }
-
-//PanchaPakshiCharter.printChart("06_30", "Friday", false)
-
-//println SunriseGetter.getSunRiseTime("mettupalayam", "1982_05_02")
-
-//PanchaPakshiCharter.printChart("mettupalayam", "1982_05_01", "saturday", true)
-//PanchaPakshiCharter.printChart("mettupalayam", "1980_07_04", "friday", false)
-//PanchaPakshiCharter.printChart("chennai", "2022_06_29", "wednesday", true)
-println '==========================================='
-PanchaPakshiCharter.printChart("chennai", "2022_09_03", true)
-
-//PanchaPakshiCharter.printChart("pattukottai", "1987_06_05", "friday", true)
