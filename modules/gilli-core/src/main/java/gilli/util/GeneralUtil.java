@@ -1,5 +1,8 @@
 package gilli.util;
 
+import groovy.json.JsonOutput;
+
+import java.io.File;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
@@ -56,6 +59,15 @@ public class GeneralUtil
         {
             e.printStackTrace();
         }
+    }
+    public static String prettyJson(Object o)
+    {
+        return JsonOutput.prettyPrint(JsonOutput.toJson(o));
+    }
+
+    public static boolean fileOrDirDoesNotExist(File file)
+    {
+        return !file.exists();
     }
 
 }
