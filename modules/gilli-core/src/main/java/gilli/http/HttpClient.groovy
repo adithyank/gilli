@@ -24,6 +24,20 @@ class HttpClient
     static void POST(@DelegatesTo(HttpCaller) Closure c) {
         DslUtil.call(c, new HttpCaller().method(HttpMethod.POST)).delegate.call()
     }
+
+    static String GET(String urlString)
+    {
+        String resp
+
+        GET {
+            url(urlString)
+            response {
+                text {resp = it}
+            }
+        }
+
+        return resp
+    }
 }
 
 class HttpCaller {
@@ -34,6 +48,15 @@ class HttpCaller {
     private Map<String, List<String>> parameters = [:]
     private Closure responseClosure
     private BodyDelegate body
+
+    void url(String url)
+    {
+        URL url2 = new URL(url)
+        //host = "$url2.protocol://$url2.host"
+        //path = url2.path
+        host = url2.toExternalForm()
+        path = ''
+    }
 
     void host(String host) {
         this.host = host
