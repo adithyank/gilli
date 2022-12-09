@@ -1,9 +1,22 @@
 package gilli.extras.geo
 
 import gilli.http.HttpClient
+import groovy.json.JsonSlurper
 
 class Geo
 {
+    static Map curLocation()
+    {
+        String resp = HttpClient.GET('https://ipinfo.io/json')
+        //println "resp = $resp"
+        return new JsonSlurper().parse(resp.toCharArray());
+    }
+
+    static String getCurrentCity()
+    {
+        return curLocation().get('city')
+    }
+
     static Map latlong(String address)
     {
         def list
