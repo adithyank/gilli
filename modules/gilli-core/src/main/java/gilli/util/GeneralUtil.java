@@ -4,6 +4,7 @@ import groovy.json.JsonOutput;
 
 import java.io.File;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -12,7 +13,7 @@ public class GeneralUtil
 {
     public static boolean isScalar(Object o)
     {
-        return o.getClass().isPrimitive() || o instanceof String;
+        return o == null || o.getClass().isPrimitive() || o instanceof String || o.getClass().isEnum() || o instanceof Number || o instanceof Boolean;
     }
 
     public static boolean isEmpty(Object o)
@@ -70,4 +71,10 @@ public class GeneralUtil
         return !file.exists();
     }
 
+    public static <T> List<T> copyAndAppend(List<T> list, T o)
+    {
+        List<T> ret = new ArrayList<>(list);
+        ret.add(o);
+        return ret;
+    }
 }
