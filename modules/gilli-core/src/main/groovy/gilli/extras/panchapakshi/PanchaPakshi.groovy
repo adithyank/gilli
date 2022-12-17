@@ -8,6 +8,8 @@ import gilli.util.dataframe.DataFrame
 import groovy.transform.ToString
 
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.OffsetDateTime
 
 class Util
 {
@@ -209,7 +211,19 @@ class PanchaPakshiCharter
             address = Geo.currentCity
 
         if (!GeneralUtil.hasValue(yyyy_mm_dd))
+        {
             yyyy_mm_dd = YYYY_MM_DD.format(new Date())
+        }
+        else if (yyyy_mm_dd == "tom" || yyyy_mm_dd == "tomorrow")
+        {
+            long tomMillis = OffsetDateTime.now().plusDays(1).toEpochSecond() * 1000;
+            yyyy_mm_dd = YYYY_MM_DD.format(new Date(tomMillis));
+        }
+        else if (yyyy_mm_dd == "yest" || yyyy_mm_dd == "yesterday")
+        {
+            long tomMillis = OffsetDateTime.now().minusDays(1).toEpochSecond() * 1000;
+            yyyy_mm_dd = YYYY_MM_DD.format(new Date(tomMillis));
+        }
 
         Gilli.stdout.info("Given Arguments: Address: $address, yyyy_mm_dd: $yyyy_mm_dd, valarpirai: $valarPirai, bwFilter: $bwFilter")
         Date date = YYYY_MM_DD.parse(yyyy_mm_dd)
