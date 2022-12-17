@@ -30,6 +30,7 @@ public class FileDupFinder
         for (String parentPath : parentPaths)
             Files.walkFileTree(Paths.get(parentPath).toFile().getCanonicalFile().toPath(), visitor);
 
+        context.walkingDone();
         calc(context);
         visitor.cleanUp();
         Gilli.stdout.info("{} duplicate Set(s) found", context.dupId);
@@ -64,7 +65,7 @@ public class FileDupFinder
             for (Map.Entry<String, List<File>> hashWise : hashWiseFiles.entrySet())
             {
                 if (hashWise.getValue().size() > 1)
-                    dupFound(context, e.getValue());
+                    dupFound(context, hashWise.getValue());
             }
         }
     }
@@ -100,9 +101,10 @@ public class FileDupFinder
 
         public long dupId = 0;
 
+        public long visitedFileCount = 0;
+
         public double saveableSize = 0;
         public double deletedSize = 0;
-
 
         public void addToSaveableSize(double size)
         {
@@ -119,8 +121,21 @@ public class FileDupFinder
             return ++dupId;
         }
 
+        public void walkingDone()
+        {
+            System.out.println();
+            System.out.println("Totally Visited Files : " + visitedFileCount);
+        }
+
         public void addFileSize(File file)
         {
+            visitedFileCount++;
+
+            if (visitedFileCount % 100 == 0)
+                System.out.print(visitedFileCount);
+            else if (visitedFileCount % 10 == 0)
+                System.out.print(".");
+
             //System.out.println(file.length() + "-" + file);
             sizeWiseFileNames.putIfAbsent(file.length(), new ArrayList<>());
             sizeWiseFileNames.get(file.length()).add(file);
