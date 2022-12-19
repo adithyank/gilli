@@ -12,7 +12,7 @@ public class GeneralInstanceMethodExt
     static void printAsLines(Map self)
     {
         if (self == null)
-            println "NULL"
+            println self
         else
             self.entrySet().each {println it}
     }
