@@ -80,20 +80,35 @@ public class RecursiveObjectSearch
             result.put(newPath, value);
         }
 
-        public void printpaths()
+        public void printKeys()
         {
             for (Map.Entry<List<String>, Object> r : result.entrySet())
             {
-                String k = r.getKey().stream().map(
-                        s -> s.contains("-") ? '"' + s + '"' : s
-                ).collect(Collectors.joining("."));
+                String k = printableKey(r.getKey());
+                Gilli.stdoutWithoutTime.info(k);
+            }
+        }
 
-                k = k.replace(".[", "[");
+        public void printPaths()
+        {
+            for (Map.Entry<List<String>, Object> r : result.entrySet())
+            {
+                String k = printableKey(r.getKey());
 
                 Gilli.stdoutWithoutTime.info("{} = {}",
                         k,
                         r.getValue());
             }
+        }
+
+        private String printableKey(List<String> key)
+        {
+            String k = key.stream().map(
+                    s -> s.contains("-") ? '"' + s + '"' : s
+            ).collect(Collectors.joining("."));
+
+            k = k.replace(".[", "[");
+            return k;
         }
     }
 }
