@@ -1,9 +1,11 @@
 package gilli.ext
 
+import gilli.ext.fw.ExtModule
 import gilli.util.GeneralUtil
 import gilli.util.RecursiveObjectSearch;
 
-public class GeneralInstanceMethodExt
+@ExtModule
+class GeneralInstanceMethodExt
 {
     static Object searchKey(Object self, String key)
     {
