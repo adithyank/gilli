@@ -1,4 +1,4 @@
 moduleName=gilli_core_ext
 moduleVersion=1.0
-extensionClasses=gilli.ext.StringInstanceMethodExt,gilli.ext.GeneralInstanceMethodExt
+extensionClasses=gilli.ext.StringInstanceMethodExt,gilli.ext.GeneralInstanceMethodExt,gilli.datetime.extension.DateTimeExt
 staticExtensionClasses=
