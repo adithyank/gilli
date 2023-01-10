@@ -1,6 +1,7 @@
 package gilli.ext
 
 import gilli.ext.fw.ExtModule
+import gilli.internal.main.Gilli
 import gilli.util.GeneralUtil
 import gilli.util.RecursiveObjectSearch;
 
@@ -31,5 +32,28 @@ class GeneralInstanceMethodExt
             println self
         else
             self.each {println it}
+    }
+
+    static void ifDir(String dir, Closure closure)
+    {
+        File fd = Gilli.fileFromInvocationDir(dir)
+        if (fd.directory)
+            closure.call(fd)
+    }
+
+    static File getAsFile(String self)
+    {
+        return Gilli.fileFromInvocationDir(self)
+    }
+
+    static List<String> splitc(String self, String str)
+    {
+        String regex = '[' + str + ']+'
+        return self.split(regex).findAll {it && !it.empty}
+    }
+
+    static List<String> getSplitcs(String self)
+    {
+        return self.splitc(' ')
     }
 }

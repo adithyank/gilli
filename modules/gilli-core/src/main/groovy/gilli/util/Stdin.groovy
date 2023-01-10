@@ -46,6 +46,11 @@ class Stdin
     {
         return json();
     }
+
+    static String getText()
+    {
+        return System.in.text
+    }
 }
 
 class ComplexClosureInfo
