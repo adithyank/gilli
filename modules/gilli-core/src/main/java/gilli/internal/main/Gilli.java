@@ -121,17 +121,22 @@ public class Gilli
         return parent + File.separator + child;
     }
 
-    static File fileFromInvocationDir(String path)
+    public static File fileFromInvocationDir(String path)
     {
         return new File(pathFromInvocationDir(path));
     }
 
-    static String pathFromCurDir(String path)
+    public static File fileFromInvocationDir(File file)
+    {
+        return new File(pathFromInvocationDir(file.getAbsolutePath()));
+    }
+
+    public static String pathFromCurDir(String path)
     {
         return relativePath(workingDir(), path);
     }
 
-    static URL getResource(String path)
+    public static URL getResource(String path)
     {
         return Gilli.class.getClassLoader().getResource(path);
     }
