@@ -7,10 +7,12 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class GeneralUtil
 {
+    public static final Random RANDOM = new Random();
     public static boolean isScalar(Object o)
     {
         return o == null || o.getClass().isPrimitive() || o instanceof String || o.getClass().isEnum() || o instanceof Number || o instanceof Boolean;
@@ -76,5 +78,10 @@ public class GeneralUtil
         List<T> ret = new ArrayList<>(list);
         ret.add(o);
         return ret;
+    }
+
+    public static int randomWithin(int i)
+    {
+        return RANDOM.nextInt(i);
     }
 }
