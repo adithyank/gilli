@@ -13,8 +13,8 @@ public class PanchaPakshiDayChartCmd implements Runnable
     @CommandLine.Option(names = {"-d", "--date"}, description = "Date for which the chart needs to be printed")
     private String date_yyyy_mm_dd;
 
-    @CommandLine.Option(names = {"--valarpirai"}, description = "Given date is valar pirai. [true|false]. default: true")
-    private boolean valarPirai = true;
+    @CommandLine.Option(names = {"-tp", "--theipirai"}, description = "Given date is taken as thei pirai. [true|false]. default: false")
+    private boolean theiPirai = false;
 
     private String bwFilter;
 
@@ -24,7 +24,7 @@ public class PanchaPakshiDayChartCmd implements Runnable
     @Override
     public void run()
     {
-        PanchaPakshiCharter.printChart(location, date_yyyy_mm_dd, valarPirai, bwFilter);
+        PanchaPakshiCharter.printChart(location, date_yyyy_mm_dd, !theiPirai, bwFilter);
     }
 
     @CommandLine.Option(names = {"-f", "--bwfilter"}, description = "Filter for bird and work. This arg value should have exactly 3 letters. 1st 2 letters of the filter would be 1st 2 letters of bird and 3rd letter of the filter will be 1st letter of the work")
