@@ -55,32 +55,24 @@ allprojects { oneProject ->
         groovyOptions.fileExtensions += 'gilli'
     }
 
-    configurations {
-        groovy
-        lib
-    }
-
     dependencies {
-        implementation configurations.lib
-        lib configurations.groovy
-
         if (rootProject.GILLI_ANNOTATION_PROCESSING_ENABLED) {
             if (oneProject.name != 'gilli-pre')
                 annotationProcessor project(':gilli-pre')
         }
 
-        groovy(group: 'org.apache.groovy', name: 'groovy', version: rootProject.ext.GROOVY_VERSION)
-        groovy(group: 'org.apache.groovy', name: 'groovy-json', version: rootProject.ext.GROOVY_VERSION)
-        groovy(group: 'org.apache.groovy', name: 'groovy-xml', version: rootProject.ext.GROOVY_VERSION)
+        api (group: 'org.apache.groovy', name: 'groovy', version: rootProject.ext.GROOVY_VERSION)
+        api (group: 'org.apache.groovy', name: 'groovy-json', version: rootProject.ext.GROOVY_VERSION)
+        api (group: 'org.apache.groovy', name: 'groovy-xml', version: rootProject.ext.GROOVY_VERSION)
 
-        lib 'info.picocli:picocli-groovy:4.6.3'
-        lib(group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.8.1')
-        lib(group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.8.1')
+        api 'info.picocli:picocli-groovy:4.6.3'
+        api (group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.8.1')
+        api (group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.8.1')
 
         testImplementation(group: 'org.testng', name: 'testng', version: '6.8')
-        lib(group: 'org.glassfish.jersey.core', name: 'jersey-client', version: '2.28')
-        lib(group: 'org.glassfish.jersey.inject', name: 'jersey-hk2', version: '2.28')
-        lib 'javax.activation:activation:1.1.1'
+        api (group: 'org.glassfish.jersey.core', name: 'jersey-client', version: '2.28')
+        api (group: 'org.glassfish.jersey.inject', name: 'jersey-hk2', version: '2.28')
+        api 'javax.activation:activation:1.1.1'
         //lib(group: 'io.github.classgraph', name: 'classgraph', version: '4.8.48')
     }
 
@@ -155,7 +147,7 @@ task copyFiles(type: Copy) {
         //}
 
         into('internal/lib/ext') {
-            from p.configurations.lib
+            from p.configurations.compileClasspath
         }
 
         into('internal/lib/int') {
