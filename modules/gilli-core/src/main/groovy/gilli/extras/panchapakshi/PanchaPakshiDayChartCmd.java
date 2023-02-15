@@ -4,7 +4,7 @@ import picocli.CommandLine;
 
 import java.util.Arrays;
 
-@CommandLine.Command(name = "daychart", sortOptions = false, synopsisHeading = "Prints Panchapakshi Day chart\n\n", description = "Prints Panchapakshi Day chart")
+@CommandLine.Command(name = "daychart", sortOptions = false, description = "Prints Panchapakshi Day chart")
 public class PanchaPakshiDayChartCmd implements Runnable
 {
     @CommandLine.Option(names = {"-a", "--address"}, description = "Address to which the chart needs to be printed")
