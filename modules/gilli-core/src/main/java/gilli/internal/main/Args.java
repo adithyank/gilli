@@ -3,6 +3,7 @@ package gilli.internal.main;
 import gilli.extras.dict.DictionaryCmdLine;
 import gilli.extras.panchapakshi.PanchaPakshiCmd;
 import gilli.files.FileCmd;
+import gilli.flutter.FlutterDevCmd;
 import gilli.pwd.PasswordStore;
 import gilli.util.GeneralUtil;
 import picocli.CommandLine;
@@ -18,7 +19,7 @@ import java.util.stream.Collectors;
 
 @CommandLine.Command(name = "gilli", sortOptions = false, synopsisHeading = "Gilli : A DSL Platform\n\n",
 subcommands = {HelpCommand.class, PasswordStore.class, PanchaPakshiCmd.class, DictionaryCmdLine.class,
-FileCmd.class})
+FileCmd.class, FlutterDevCmd.class})
 public class Args implements Runnable
 {
 //    @Option(names = {"-h", "--help"}, description = "Print Help Message and Exit")
@@ -61,15 +62,15 @@ public class Args implements Runnable
     @Parameters(index = "0..*", description = "Gilli script files to execute")
     public void setFiles(File[] files)
     {
+        List<File> notAvailableFiles = Arrays.stream(files).filter(f -> !f.exists()).collect(Collectors.toList());
+
+        if (!GeneralUtil.isEmpty(notAvailableFiles))
+            throw new CommandLine.ParameterException(spec.commandLine(), "Script File(s) not found: " + notAvailableFiles.stream().map(File::getAbsolutePath).collect(Collectors.toList()));
+
         List<File> errorFiles = Arrays.stream(files).filter(Gilli::invalidScriptExtension).collect(Collectors.toList());
 
         if (!GeneralUtil.isEmpty(errorFiles))
             throw new CommandLine.ParameterException(spec.commandLine(), "Script file extension is not 'gilli' for files: " + errorFiles.stream().map(File::getAbsolutePath).collect(Collectors.toList()));
-
-        List<File> notAvailableFiles = Arrays.stream(files).filter(f -> !f.exists()).collect(Collectors.toList());
-
-        if (!GeneralUtil.isEmpty(notAvailableFiles))
-            throw new CommandLine.ParameterException(spec.commandLine(), "File(s) not found: " + notAvailableFiles.stream().map(File::getAbsolutePath).collect(Collectors.toList()));
 
         this.files = files;
     }
