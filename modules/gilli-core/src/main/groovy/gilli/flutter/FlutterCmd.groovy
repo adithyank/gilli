@@ -3,8 +3,8 @@ package gilli.flutter
 import gilli.process.OSProcess
 import picocli.CommandLine
 
-@CommandLine.Command(name = "flutterdev", sortOptions = false, description = "Flutter Development Related Tools")
-class FlutterDevCmd
+@CommandLine.Command(name = "flutter", sortOptions = false, description = "Flutter Development Related Tools")
+class FlutterCmd
 {
     public static final String DISABLE_WEB_SECURITY = '--disable-web-security'
 

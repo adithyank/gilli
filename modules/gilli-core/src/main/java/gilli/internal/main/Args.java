@@ -3,8 +3,9 @@ package gilli.internal.main;
 import gilli.extras.dict.DictionaryCmdLine;
 import gilli.extras.panchapakshi.PanchaPakshiCmd;
 import gilli.files.FileCmd;
-import gilli.flutter.FlutterDevCmd;
+import gilli.flutter.FlutterCmd;
 import gilli.pwd.PasswordStore;
+import gilli.text.TextCmd;
 import gilli.util.GeneralUtil;
 import picocli.CommandLine;
 import picocli.CommandLine.Model.CommandSpec;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 
 @CommandLine.Command(name = "gilli", sortOptions = false, synopsisHeading = "Gilli : A DSL Platform\n\n",
 subcommands = {HelpCommand.class, PasswordStore.class, PanchaPakshiCmd.class, DictionaryCmdLine.class,
-FileCmd.class, FlutterDevCmd.class})
+FileCmd.class, FlutterCmd.class, TextCmd.class})
 public class Args implements Runnable
 {
 //    @Option(names = {"-h", "--help"}, description = "Print Help Message and Exit")
