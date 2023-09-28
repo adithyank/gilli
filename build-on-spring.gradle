@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+    id 'war'
+    id 'org.springframework.boot' version '3.0.0'
+    id 'io.spring.dependency-management' version '1.1.0'
+}
+
+group = 'xyz.reachadi'
+version = '0.2'
+sourceCompatibility = '19'
+
+ext {
+    buildType = 'ga' //beta
+
+    DISTRIBUTION_DIR = project.buildDir.absolutePath + File.separator + 'gillispring-dist' + File.separator + name
+    VERSION_FILE = File.createTempFile('version', '.info')
+
+    GROOVY_VERSION = '4.0.4'
+
+    GILLI_ANNOTATION_PROCESSING_ENABLED = false
+}
+
+repositories {
+    mavenCentral()
+}
+
+
+
+
+dependencies {
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.17.2'
+    implementation 'org.springframework.boot:spring-boot-starter'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'info.picocli:picocli-spring-boot-starter:4.7.0'
+}
+
+tasks.named('test') {
+    useTesNG
+}
